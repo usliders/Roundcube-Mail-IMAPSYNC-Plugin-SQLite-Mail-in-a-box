@@ -9,6 +9,8 @@ $labels['fetchmailenabled'] = 'Enable';
 $labels['nofetch'] = 'No entries available';
 $labels['fetchmail_entries'] = 'Available entries';
 $labels['pollinterval'] = 'Pollinterval of the mailbox';
+$labels['usessl'] = 'Use SSL';
+$labels['fetchmailfetchall'] = 'Fetch all eMails from server';
 
 $messages = array();
 $messages['fetchmaildelconfirm'] = 'Do you want to delete this entry?';

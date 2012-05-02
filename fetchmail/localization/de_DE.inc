@@ -4,11 +4,13 @@ $labels = array();
 $labels['fetchmail'] = 'Fetchmail';
 $labels['fetchmailtyp'] = 'Typ';
 $labels['fetchmailserver'] = 'POP3/IMAP Server';
-$labels['fetchmaildelete'] = 'Mails nach Empfang löschen';
-$labels['fetchmailenabled'] = 'Aktivieren';
+$labels['fetchmailkeep'] = 'Mails nach Empfang _nicht_ löschen';
+$labels['fetchmailenabled'] = 'Aktiv';
 $labels['nofetch'] = 'Keine Einträge vorhanden';
 $labels['fetchmail_entries'] = 'Vorhandene Einträge';
 $labels['pollinterval'] = 'Häufigkeit der Mailboxabfrage in Minuten';
+$labels['usessl'] = 'SSL bei Abruf verwenden';
+$labels['fetchmailfetchall'] = 'Alle eMails vom Server abrufen';
 
 $messages = array();
 $messages['fetchmaildelconfirm'] = 'Wollen Sie diesen Eintrag wirklich löschen?';
