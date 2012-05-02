@@ -8,8 +8,8 @@ $labels['fetchmailkeep'] = 'Mails nach Empfang _nicht_ löschen';
 $labels['fetchmailenabled'] = 'Aktiv';
 $labels['nofetch'] = 'Keine Einträge vorhanden';
 $labels['fetchmail_entries'] = 'Vorhandene Einträge';
-$labels['pollinterval'] = 'Häufigkeit der Mailboxabfrage in Minuten';
-$labels['usessl'] = 'SSL bei Abruf verwenden';
+$labels['fetchmailpollinterval'] = 'Häufigkeit der Mailboxabfrage in Minuten';
+$labels['fetchmailusessl'] = 'SSL bei Abruf verwenden';
 $labels['fetchmailfetchall'] = 'Alle eMails vom Server abrufen';
 
 $messages = array();

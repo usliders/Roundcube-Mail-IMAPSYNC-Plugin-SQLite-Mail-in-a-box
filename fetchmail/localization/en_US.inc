@@ -8,8 +8,8 @@ $labels['fetchmaildelete'] = 'Delete emails after receiving';
 $labels['fetchmailenabled'] = 'Enable';
 $labels['nofetch'] = 'No entries available';
 $labels['fetchmail_entries'] = 'Available entries';
-$labels['pollinterval'] = 'Pollinterval of the mailbox';
-$labels['usessl'] = 'Use SSL';
+$labels['fetchmailpollinterval'] = 'Pollinterval of the mailbox';
+$labels['fetchmailusessl'] = 'Use SSL';
 $labels['fetchmailfetchall'] = 'Fetch all eMails from server';
 
 $messages = array();
