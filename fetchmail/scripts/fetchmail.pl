@@ -126,7 +126,7 @@ TXT
   print $file_handler $text;
   close $file_handler;
 
-  $ret=`/usr/bin/fetchmail -f $filename -i $run_dir/fetchmail.pid`;
+  $ret=`/usr/bin/fetchmail --tracepolls -f $filename -i $run_dir/fetchmail.pid`;
 
   unlink $filename;
 
