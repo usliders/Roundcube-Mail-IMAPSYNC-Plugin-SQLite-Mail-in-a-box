@@ -2,6 +2,11 @@
 
 RCFetchmail is a Roundcube plugin, which allows users to download their mail from external mailboxes.
 
+##Prerequisites
+1. Roundcube
+2. Database (PostgreSQL or MySQL)
+3. fetchmail
+
 ##Installation
 1. First you need to install fetchmail. For Debian you can do so by `sudo apt-get install fetchmail`
 2. Next you should extract **RCFetchmail** archive into your Roundcube plugins folder creating "fetchmail" folder there.
