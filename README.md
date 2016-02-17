@@ -1,6 +1,6 @@
 #RCFetchmail
 
-RCFetchmail is a Roundcube plugin, which allows users to download their mail from external mailboxes.
+**RCFetchmail** is a **Roundcube** plugin, which allows users to download their mail from external mailboxes.
 
 ##Prerequisites
 1. **Roundcube**
