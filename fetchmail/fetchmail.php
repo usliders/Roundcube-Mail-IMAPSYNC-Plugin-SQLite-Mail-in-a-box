@@ -151,7 +151,7 @@ class fetchmail extends rcube_plugin {
 			'pop3',
 			'imap'
 		));
-		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailprotcol')), $input_fetchmailtyp->show($protocol));
+		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailprotocol')), $input_fetchmailtyp->show($protocol));
 	
 		$field_id              = 'fetchmailserver';
 		$input_fetchmailserver = new html_inputfield(array(
