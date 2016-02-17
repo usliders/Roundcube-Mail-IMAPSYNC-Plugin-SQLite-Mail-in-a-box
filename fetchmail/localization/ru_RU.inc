@@ -2,28 +2,29 @@
 
 $labels = array();
 $labels['fetchmail'] = 'Fetchmail';
-$labels['fetchmailtyp'] = 'Тип сервера';
-$labels['fetchmailserver'] = 'Адрес сервера';
-$labels['fetchmailprotocol'] = 'Протокол';
 $labels['fetchmaildelete'] = 'Удалить сообщения после загрузки';
-$labels['fetchmailkeep'] = 'Не удалять сообщения на сервере';
 $labels['fetchmailenabled'] = 'Включить';
-$labels['nofetch'] = 'Нет записей';
-$labels['fetchmail_entries'] = 'Все записи';
-$labels['fetchmailpollinterval'] = 'Частота проверки';
-$labels['fetchmailusessl'] = 'Использовать SSL';
 $labels['fetchmailfetchall'] = 'Загружать все сообщения с сервера';
+$labels['fetchmailkeep'] = 'Не удалять сообщения на сервере';
+$labels['fetchmailpollinterval'] = 'Частота проверки';
+$labels['fetchmailprotocol'] = 'Протокол';
+$labels['fetchmailserver'] = 'Адрес сервера';
+$labels['fetchmailtyp'] = 'Тип сервера';
+$labels['fetchmailusessl'] = 'Использовать SSL';
+$labels['fetchmail_entries'] = 'Учётные записи для сбора почты';
+$labels['fetchmail_to'] = 'Собирать почту в';
+$labels['nofetch'] = 'Нет записей';
 
 $messages = array();
-$messages['fetchmaildelconfirm'] = 'Вы хотите действительно удалить эту запись?';
-$messages['fetchmaillimitreached'] = 'Вы достигли ограничения';
-$messages['textempty'] = 'Одно или несколько полей не заполнено';
-$messages['opnotpermitted'] = 'Эта операция не допускается!';
-$messages['fetchmailnewentry'] = 'Сохранить как новую запись';
 $messages['fetchmailabort'] = 'Отменить';
-$messages['successfullysaved'] = 'Успешно сохранено!';
-$messages['successfullyenabled'] = 'Успешно включено!';
-$messages['successfullydisabled'] = 'Успешно выключено!';
+$messages['fetchmaildelconfirm'] = 'Вы действительно хотите удалить эту запись?';
+$messages['fetchmaillimitreached'] = 'Вы достигли ограничения';
+$messages['fetchmailnewentry'] = 'Сохранить как новую запись';
+$messages['opnotpermitted'] = 'Эта операция не разрешена!';
 $messages['successfullydeleted'] = 'Успешно удалено!';
+$messages['successfullydisabled'] = 'Успешно отключено!';
+$messages['successfullyenabled'] = 'Успешно включено!';
+$messages['successfullysaved'] = 'Успешно сохранено!';
+$messages['textempty'] = 'Одно или несколько полей не заполнены';
 
 ?>

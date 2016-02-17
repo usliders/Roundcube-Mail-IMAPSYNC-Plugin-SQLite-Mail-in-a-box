@@ -2,26 +2,29 @@
 
 $labels = array();
 $labels['fetchmail'] = 'Fetchmail';
-$labels['fetchmailtyp'] = 'Type';
-$labels['fetchmailserver'] = 'POP3/IMAP Server';
 $labels['fetchmaildelete'] = 'Delete emails after receiving';
 $labels['fetchmailenabled'] = 'Enable';
-$labels['nofetch'] = 'No entries available';
-$labels['fetchmail_entries'] = 'Available entries';
-$labels['fetchmailpollinterval'] = 'Pollinterval of the mailbox';
-$labels['fetchmailusessl'] = 'Use SSL';
 $labels['fetchmailfetchall'] = 'Fetch all eMails from server';
+$labels['fetchmailkeep'] = 'Do not remove messages from the server';
+$labels['fetchmailpollinterval'] = 'Poll interval for the mailbox';
+$labels['fetchmailprotocol'] = 'Protocol';
+$labels['fetchmailserver'] = 'Server hostname';
+$labels['fetchmailtyp'] = 'Type';
+$labels['fetchmailusessl'] = 'Use SSL';
+$labels['fetchmail_entries'] = 'Accounts to collect from';
+$labels['fetchmail_to'] = 'Collect mail to';
+$labels['nofetch'] = 'No entries available';
 
 $messages = array();
+$messages['fetchmailabort'] = 'Cancel';
 $messages['fetchmaildelconfirm'] = 'Do you want to delete this entry?';
 $messages['fetchmaillimitreached'] = 'Limit reached';
-$messages['textempty'] = 'One or more fields are empty';
-$messages['opnotpermitted'] = 'Operation not permitted!';
 $messages['fetchmailnewentry'] = 'Save as new';
-$messages['fetchmailabort'] = 'Cancel';
-$messages['successfullysaved'] = 'Saved successfully!';
-$messages['successfullyenabled'] = 'Enabled successfully!';
-$messages['successfullydisabled'] = 'Disabled successfully!';
+$messages['opnotpermitted'] = 'Operation not permitted!';
 $messages['successfullydeleted'] = 'Deleted successfully!';
+$messages['successfullydisabled'] = 'Disabled successfully!';
+$messages['successfullyenabled'] = 'Enabled successfully!';
+$messages['successfullysaved'] = 'Saved successfully!';
+$messages['textempty'] = 'One or more fields are empty';
 
 ?>

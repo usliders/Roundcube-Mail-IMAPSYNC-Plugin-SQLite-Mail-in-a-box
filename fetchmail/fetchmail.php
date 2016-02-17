@@ -130,7 +130,7 @@ class fetchmail extends rcube_plugin {
 			}
 		}
 		$newentry = 0;
-		$out .= '<fieldset><legend>'.$this->gettext('fetchmail').' - '.$mailbox.'</legend>'."\n";
+		$out .= '<fieldset><legend>'.$this->gettext('fetchmail_to').' '.$mailbox.'</legend>'."\n";
 		$out .= '<br />' . "\n";
 		$out .= '<table' . $attrib_str . ">\n\n";
 		$hidden_id = new html_hiddenfield(array(
@@ -257,7 +257,7 @@ class fetchmail extends rcube_plugin {
 	function gen_table($attrib) {
 		$rcmail = rcmail::get_instance();
 		$mailbox = $rcmail->user->data['username'];
-		$out = '<fieldset><legend>'.$this->gettext('fetchmail_entries').' - '.$mailbox.'</legend>'."\n";
+		$out = '<fieldset><legend>'.$this->gettext('fetchmail_entries').'</legend>'."\n";
 		$out .= '<br />' . "\n";
 		$fetch_table = new html_table(array(
 			'id' => 'fetch-table',
