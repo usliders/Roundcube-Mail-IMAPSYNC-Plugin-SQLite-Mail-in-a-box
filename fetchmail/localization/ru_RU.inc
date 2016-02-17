@@ -9,7 +9,6 @@ $labels['fetchmailkeep'] = 'Не удалять сообщения на серв
 $labels['fetchmailpollinterval'] = 'Частота проверки';
 $labels['fetchmailprotocol'] = 'Протокол';
 $labels['fetchmailserver'] = 'Адрес сервера';
-$labels['fetchmailtyp'] = 'Тип сервера';
 $labels['fetchmailusessl'] = 'Использовать SSL';
 $labels['fetchmail_entries'] = 'Учётные записи для сбора почты';
 $labels['fetchmail_to'] = 'Собирать почту в';

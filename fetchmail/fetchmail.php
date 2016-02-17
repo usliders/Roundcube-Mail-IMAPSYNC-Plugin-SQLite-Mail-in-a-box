@@ -140,18 +140,18 @@ class fetchmail extends rcube_plugin {
 		$out .= $hidden_id->show();
 	
 		$field_id           = 'fetchmailprotocol';
-		$input_fetchmailtyp = new html_select(array(
+		$input_fetchmailprotocol = new html_select(array(
 			'name' => '_fetchmailprotocol',
 			'id' => $field_id
 		));
-		$input_fetchmailtyp->add(array(
-			'POP3',
-			'IMAP'
+		$input_fetchmailprotocol->add(array(
+			'IMAP',
+			'POP3'
 		), array(
-			'pop3',
-			'imap'
+			'imap',
+			'pop3'
 		));
-		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailprotocol')), $input_fetchmailtyp->show($protocol));
+		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailprotocol')), $input_fetchmailprotocol->show($protocol));
 	
 		$field_id              = 'fetchmailserver';
 		$input_fetchmailserver = new html_inputfield(array(
@@ -204,29 +204,29 @@ class fetchmail extends rcube_plugin {
 		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailpollinterval')), $input_fetchmailpollinterval->show($pollinterval));
 		
 		$field_id              = 'fetchmailkeep';
-		$input_fetchmaildelete = new html_checkbox(array(
+		$input_fetchmailkeep = new html_checkbox(array(
 			'name' => '_fetchmailkeep',
 			'id' => $field_id,
 			'value' => '1'
 		));
-		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailkeep')), $input_fetchmaildelete->show($keep));
+		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailkeep')), $input_fetchmailkeep->show($keep));
 	
 		$field_id              = 'fetchmailfetchall';
-		$input_fetchmaildelete = new html_checkbox(array(
+		$input_fetchmailfetchall = new html_checkbox(array(
 			'name' => '_fetchmailfetchall',
 			'id' => $field_id,
-			'value' => '1'
+			'value' => '0'
 		));
-		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailfetchall')), $input_fetchmaildelete->show($fetchall));
+		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailfetchall')), $input_fetchmailfetchall->show($fetchall));
 		
 	
 		$field_id              = 'fetchmailusessl';
-		$input_fetchmaildelete = new html_checkbox(array(
+		$input_fetchmailusessl = new html_checkbox(array(
 			'name' => '_fetchmailusessl',
 			'id' => $field_id,
 			'value' => '1'
 		));
-		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailusessl')), $input_fetchmaildelete->show($usessl));
+		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailusessl')), $input_fetchmailusessl->show($usessl));
 	
 	
 		$field_id               = 'fetchmailenabled';
