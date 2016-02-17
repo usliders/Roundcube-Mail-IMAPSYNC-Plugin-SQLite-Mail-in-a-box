@@ -46,7 +46,7 @@ class fetchmail extends rcube_plugin {
 		$rcmail = rcmail::get_instance();
 		$id = get_input_value('_id', RCUBE_INPUT_GET);
 		if ($id != 0 || $id != '') {
-			$sql = "UPDATE fetchmail SET active = '0' WHERE id = '$id' LIMIT 1";
+			$sql = "UPDATE fetchmail SET active = '0' WHERE id = '$id'";
 			$update = $rcmail->db->query($sql);
 		}
 	}
@@ -55,7 +55,7 @@ class fetchmail extends rcube_plugin {
 		$rcmail = rcmail::get_instance();
 		$id     = get_input_value('_id', RCUBE_INPUT_GET);
 		if ($id != 0 || $id != '') {
-			$sql = "UPDATE fetchmail SET active = '1' WHERE id = '$id' LIMIT 1";
+			$sql = "UPDATE fetchmail SET active = '1' WHERE id = '$id'";
 			$update = $rcmail->db->query($sql);
 		}
 	}
@@ -64,7 +64,7 @@ class fetchmail extends rcube_plugin {
 		$rcmail = rcmail::get_instance();
 		$id = get_input_value('_id', RCUBE_INPUT_GET);
 		if ($id != 0 || $id != '') {
-			$sql = "DELETE FROM fetchmail WHERE id = '$id' LIMIT 1";
+			$sql = "DELETE FROM fetchmail WHERE id = '$id'";
 			$delete = $rcmail->db->query($sql);
 		}
 	}
@@ -101,7 +101,7 @@ class fetchmail extends rcube_plugin {
 				$rcmail->output->command('display_message', 'Error: '.$this->gettext('fetchmaillimitreached'), 'error');
 			}
 		} else {
-			$sql = "UPDATE fetchmail SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password' WHERE id = '$id' LIMIT 1";
+			$sql = "UPDATE fetchmail SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password' WHERE id = '$id'";
 			$update = $rcmail->db->query($sql);
 			$rcmail->output->command('display_message', $this->gettext('successfullysaved'), 'confirmation');
 		}
