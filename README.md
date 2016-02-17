@@ -41,5 +41,5 @@ Appending `, 'fetchmail'` to the list of plugins will suffice.
 	our $db_password="CHANGE_ME!";
 	```
 8. Next step is to configure cron for regular mail checking with `sudo crontab -u mail -e`. For example for 5 minute intervals add this: `*/5 * * * * /var/mail/fetchmail.pl >/dev/null`
-9. You might also need to install `liblockfile-simple-perl` and `libsys-syslog-perl` or `libunix-syslog-perl`.
+9. You might also need to install `liblockfile-simple-perl` and `libsys-syslog-perl` or `libunix-syslog-perl` on Debian-based system.
 10. Lastly there might be need to do `sudo mkdir /var/run/fetchmail; sudo chown mail:mail /var/run/fetchmail`
