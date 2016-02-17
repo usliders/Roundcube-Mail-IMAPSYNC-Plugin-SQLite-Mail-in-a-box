@@ -8,8 +8,10 @@
 
 if (window.rcmail) {
 	rcmail.addEventListener('init', function(evt) {
-
-	var tab = $('<span>').attr('id', 'settingstabplugin_fetchmail').addClass('tablink'); 
+	if (rcmail.env.action == 'plugin.fetchmail' || rcmail.env.action == 'plugin.fetchmail.save' ||rcmail.env.action == 'plugin.fetchmail.del' ||rcmail.env.action == 'plugin.fetchmail.enable' ||rcmail.env.action == 'plugin.fetchmail.disable')
+		var tab = $('<span>').attr('id', 'settingstabplugin.fetchmail').addClass('tablink selected');
+		else
+		var tab = $('<span>').attr('id', 'settingstabplugin.fetchmail').addClass('tablink');
 	var button = $('<a>').attr('href', rcmail.env.comm_path+'&_action=plugin.fetchmail').html(rcmail.gettext('fetchmail','fetchmail')).appendTo(tab);
 	button.bind('click', function(e){ return rcmail.command('plugin.fetchmail', this) });
 
