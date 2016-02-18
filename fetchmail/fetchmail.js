@@ -1,8 +1,10 @@
 /******
  *
- *	Fetchmail Roundcube Plugin (RC0.4 and above), Backend: MySQL to Fetchmail
- *	Developped by Arthur Mayer, a.mayer@citex.net
- *	Released under GPL license (http://www.gnu.org/licenses/gpl.txt)
+ *	Fetchmail Roundcube Plugin (RC0.4 and above)
+ *	This software distributed under the terms of the GNU General Public License as published by the Free Software Foundation
+ *	Further details on the GPL license can be found at http://www.gnu.org/licenses/gpl.html
+ *	By contributing authors release the contributed work under this license
+ *	For more information see README.md file
  *
 ******/
 

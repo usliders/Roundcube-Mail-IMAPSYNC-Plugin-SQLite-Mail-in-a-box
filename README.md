@@ -44,3 +44,18 @@ Appending `, 'fetchmail'` to the list of plugins will suffice.
 8. Next step is to configure **cron** for regular mail checking with `sudo crontab -u mail -e`. For example for 5 minute intervals add this: `*/5 * * * * /var/mail/fetchmail.pl >/dev/null`
 9. You might also need to install `liblockfile-simple-perl` and `libsys-syslog-perl` or `libunix-syslog-perl` on **Debian**-based systems.
 10. Lastly there might be need to do `sudo mkdir /var/run/fetchmail; sudo chown mail:mail /var/run/fetchmail`
+
+##License
+This software distributed under the terms of the GNU General Public License as published by the Free Software Foundation
+Further details on the GPL license can be found at [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html)
+By contributing to **RCFetchmail**, authors release the contributed work under this license
+
+##Acknowledgements
+####Original developer
+
+*Arthur Mayer, a.mayer@citex.net
+
+####List of contributors
+
+* puzich, https://github.com/puzich
+* PF4Public, https://github.com/PF4Public
