@@ -53,7 +53,7 @@ By contributing to **RCFetchmail**, authors release the contributed work under t
 ##Acknowledgements
 ####Original developer
 
-*Arthur Mayer, a.mayer@citex.net
+Arthur Mayer, a.mayer@citex.net
 
 ####List of contributors
 
