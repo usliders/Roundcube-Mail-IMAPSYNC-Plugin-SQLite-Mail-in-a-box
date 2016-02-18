@@ -14,14 +14,14 @@
 3. After that you need to enable newly installed plugin by adding it to **Roundcube** plugin list. For **Debian** related config file is `/etc/roundcube/main.inc.php` and relevant setting is 
 	```php
 	
-	$rcmail_config['plugins'] = array();
+	$rcmail_config ['plugins'] = array();
 	
 	```
 Appending `, 'fetchmail'` to the list of plugins will suffice.
 4. You may want to change the limit of external mailboxes per user allowed in `fetchmail/config/config.inc.php`. Default setting is 
 	```php
 	
-	$rcmail_config['fetchmail_limit'] = 10;
+	$rcmail_config ['fetchmail_limit'] = 10;
 	
 	```
 5. You need to create additional table in your database using one of the supplied `.sql` files. Another possibility is to use **Postfix Admin** table if you have it installed. If using **PostgreSQL** you may use schemas to share `fetchmail` table between **Roundcube** and **Postfix Admin**. Namely creating it in `public` schema, whereas every other table in it's appropriate schema, like `roundcube` and `postfixadmin`. Please refer to [the documentation](http://www.postgresql.org/docs/current/static/ddl-schemas.html) for more information.
@@ -29,9 +29,9 @@ Appending `, 'fetchmail'` to the list of plugins will suffice.
 7. Next adapt `fetchmail.pl` to your config. Most likely you want to change these settings:
 	```perl
 	# database backend - uncomment one of these
-	#our $db_type = 'Pg';
-	my $db_type = 'mysql';
-
+	our $db_type = 'Pg';
+	#my $db_type = 'mysql';
+	
 	# host name
 	our $db_host="127.0.0.1";
 	# database name

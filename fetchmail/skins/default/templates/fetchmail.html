@@ -9,30 +9,36 @@
 </head>
 <body>
 
-<roundcube:include file="/includes/taskbar.html" />
-<roundcube:include file="/includes/header.html" />
-<roundcube:include file="/includes/settingstabs.html" />
+	<roundcube:include file="/includes/taskbar.html" />
+	<roundcube:include file="/includes/header.html" />
+	<roundcube:include file="/includes/settingstabs.html" />
 
-<div id="mainscreen">
-	<div id="myprefs">
+	<div id="mainscreen">
+		<div id="myprefs">
 
-		<div id="myform">
-		<form name="fetchmailform" action="./?_task=settings&_action=plugin.fetchmail.save" method="post">
-		<roundcube:object name="fetchmail_form" />
-		</form>
+			<div id="myform">
+				<form name="fetchmailform"
+					action="./?_task=settings&_action=plugin.fetchmail.save"
+					method="post">
+					<roundcube:object name="fetchmail_form" />
+				</form>
+			</div>
+
+			<div id="mybuttons">
+				<roundcube:button command="plugin.fetchmail.save" type="input"
+					class="button mainaction" label="save" />
+				<roundcube:button command="plugin.fetchmail" type="input"
+					class="button mainaction" label="cancel" />
+			</div>
+
+			<div id="mytable">
+				<roundcube:object name="fetchmail_table" class="fetchmail-table"
+					cellspacing="0" deleteIcon="/this/delete.png"
+					enableIcon="/this/enabled.png" disableIcon="/this/disabled.png" />
+			</div>
+
 		</div>
-
-		<div id="mybuttons">
-			<roundcube:button command="plugin.fetchmail.save" type="input" class="button mainaction" label="save" />
-			<roundcube:button command="plugin.fetchmail" type="input" class="button mainaction" label="cancel" />
-		</div>
-
-		<div id="mytable">
-		<roundcube:object name="fetchmail_table" class="fetchmail-table" cellspacing="0" deleteIcon="/this/delete.png" enableIcon="/this/enabled.png" disableIcon="/this/disabled.png" />
-		</div>
-
 	</div>
-</div>
 
 </body>
 </html>
