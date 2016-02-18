@@ -209,7 +209,7 @@ class fetchmail extends rcube_plugin {
 			'25',
 			'30'
 		));
-		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailpollinterval')), $input_fetchmailpollinterval->show($pollinterval));
+		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailpollinterval')), $input_fetchmailpollinterval->show("$pollinterval"));
 		
 		$field_id              = 'fetchmailkeep';
 		$input_fetchmailkeep = new html_checkbox(array(
@@ -223,7 +223,7 @@ class fetchmail extends rcube_plugin {
 		$input_fetchmailfetchall = new html_checkbox(array(
 			'name' => '_fetchmailfetchall',
 			'id' => $field_id,
-			'value' => '0'
+			'value' => '1'
 		));
 		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailfetchall')), $input_fetchmailfetchall->show($fetchall));
 		
