@@ -200,14 +200,16 @@ class fetchmail extends rcube_plugin {
 			'15',
 			'20',
 			'25',
-			'30'
+			'30',
+			'60'
 		), array(
 			'5',
 			'10',
 			'15',
 			'20',
 			'25',
-			'30'
+			'30',
+			'60'
 		));
 		$out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output($this->gettext('fetchmailpollinterval')), $input_fetchmailpollinterval->show("$pollinterval"));
 		
