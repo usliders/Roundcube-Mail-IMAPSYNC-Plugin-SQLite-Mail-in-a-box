@@ -113,6 +113,14 @@ class fetchmail extends rcube_plugin {
 		$id = get_input_value('_id', RCUBE_INPUT_GET);
 		$mailbox = $rcmail->user->data['username'];
 		// auslesen start
+		
+		//reasonable defaults
+		$pollinterval = '10';
+		$usessl=1;
+		$fetchall=0;
+		$keep=1;
+		$enabled=1;
+		
 		if ($id != '' || $id != 0) {
 			$sql = "SELECT * FROM fetchmail WHERE mailbox='".$mailbox."' AND id='".$id."'";
 			$result = $rcmail->db->query($sql);

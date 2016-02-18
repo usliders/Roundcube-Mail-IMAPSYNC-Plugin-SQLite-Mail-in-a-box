@@ -15,7 +15,8 @@ CREATE TABLE fetchmail (
     extra_options text,
     returned_text text,
     mda text,
-    date timestamp without time zone DEFAULT now() NOT NULL
+    date timestamp with time zone NOT NULL DEFAULT now(),
+	CONSTRAINT fetchmail_pkey PRIMARY KEY (id)
 );
 
 CREATE SEQUENCE fetchmail_id_seq
