@@ -47,7 +47,7 @@ Appending `, 'fetchmail'` to the list of plugins will suffice.
 
 ##License
 This software distributed under the terms of the GNU General Public License as published by the Free Software Foundation
-Further details on the GPL license can be found at [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html)
+Further details on the GPL license can be found at [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html) 
 By contributing to **RCFetchmail**, authors release the contributed work under this license
 
 ##Acknowledgements
