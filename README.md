@@ -1,16 +1,16 @@
-#RCFetchmail
+#Roundcube fetchmail plugin
 
-**RCFetchmail** is a **Roundcube** plugin, which allows users to download their mail from external mailboxes.
+**Roundcube fetchmail plugin** is a **Roundcube** plugin, which allows users to download their mail from external mailboxes.
 
 ##Prerequisites
 1. **Roundcube**
 2. Database (**PostgreSQL** or **MySQL**)
-3. **fetchmail**
+3. **fetchmail** itself
 4. **Postfix Admin** provides convenient `fetchmail.pl` script
 
 ##Installation
-1. First you need to install **fetchmail**. For **Debian** you can do so by `sudo apt-get install fetchmail`
-2. Next you should extract **RCFetchmail** archive into your **Roundcube** plugins folder creating "fetchmail" folder there.
+1. First you need to install **fetchmail** itself. For **Debian** you can do so by `sudo apt-get install fetchmail`
+2. Next you should extract **Roundcube fetchmail plugin** archive into your **Roundcube** `plugins` folder creating "fetchmail" folder there.
 3. After that you need to enable newly installed plugin by adding it to **Roundcube** plugin list. For **Debian** related config file is `/etc/roundcube/main.inc.php` and relevant setting is 
 	```php
 	
@@ -50,7 +50,7 @@ This software distributed under the terms of the GNU General Public License as p
 
 Further details on the GPL license can be found at [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html)
 
-By contributing to **RCFetchmail**, authors release the contributed work under this license
+By contributing to **Roundcube fetchmail plugin**, authors release their contributed work under this license
 
 ##Acknowledgements
 ####Original developer
