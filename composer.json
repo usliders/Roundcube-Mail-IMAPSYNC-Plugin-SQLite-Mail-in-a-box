@@ -28,5 +28,10 @@
 	"support": {
 		"issues": "https://github.com/pf4public/fetchmail/issues",
 		"source": "https://github.com/pf4public/fetchmail"
+	},
+	"extra": {
+		"roundcube": {
+			"sql-dir": "SQL"
+		}
 	}
 }
