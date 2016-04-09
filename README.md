@@ -58,7 +58,7 @@ By contributing to **Roundcube fetchmail plugin**, authors release their contrib
 ##Acknowledgements
 ####Original developer
 
-Arthur Mayer, a.mayer@citex.net
+Arthur Mayer, https://github.com/flames
 
 ####List of contributors
 
