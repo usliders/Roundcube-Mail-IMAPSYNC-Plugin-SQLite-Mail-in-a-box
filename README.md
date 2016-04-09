@@ -2,6 +2,9 @@
 
 **Roundcube fetchmail plugin** is a **Roundcube** plugin, which allows users to download their mail from external mailboxes.
 
+##Screenshot
+![Screenshot](http://pf4public.github.io/fetchmail/images/scrn.PNG)
+
 ##Prerequisites
 1. **Roundcube**
 2. Database (**PostgreSQL** or **MySQL**)
