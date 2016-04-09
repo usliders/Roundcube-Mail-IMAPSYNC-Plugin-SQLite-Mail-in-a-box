@@ -1,14 +1,14 @@
 <?php
 
-/******
- *
- *	Fetchmail Roundcube Plugin (RC0.4 and above)
- *	This software distributed under the terms of the GNU General Public License as published by the Free Software Foundation
- *	Further details on the GPL license can be found at http://www.gnu.org/licenses/gpl.html
- *	By contributing authors release the contributed work under this license
- *	For more information see README.md file
- *
- ******/
+/******************************************************************************
+ * Fetchmail Roundcube Plugin (RC0.4 and above)
+ * This software distributed under the terms of the GNU General Public License
+ * as published by the Free Software Foundation
+ * Further details on the GPL license can be found at 
+ * http://www.gnu.org/licenses/gpl.html
+ * By contributing authors release their contributed work under this license
+ * For more information see README.md file 
+ *****************************************************************************/
 
 class fetchmail extends rcube_plugin {
 	public $task = 'settings';
