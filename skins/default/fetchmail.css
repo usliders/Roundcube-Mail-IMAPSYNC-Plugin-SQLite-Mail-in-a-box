@@ -41,9 +41,10 @@ html>body*#fetch-table[id$="fetch-table"]:not ([class="none"] ) {
 }
 
 #myprefs {
-	border: 1px solid #909090 !important;
+	/* border: 1px solid #909090 !important;*/
 	width: 480px;
 	padding-top: 12px;
+	padding-left: 12px;
 	padding-bottom: 6px;
 }
 
