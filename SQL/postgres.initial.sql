@@ -11,11 +11,11 @@ CREATE TABLE fetchmail (
     fetchall integer DEFAULT 0 NOT NULL,
     keep integer DEFAULT 1 NOT NULL,
     protocol text DEFAULT 'IMAP'::text NOT NULL,
-    usessl integer DEFAULT 0 NOT NULL,
+    usessl integer DEFAULT 1 NOT NULL,
     extra_options text,
     returned_text text,
     mda text,
-    date timestamp with time zone NOT NULL DEFAULT now(),
+    date timestamp with time zone NOT NULL DEFAULT now() NOT NULL,
 	CONSTRAINT fetchmail_pkey PRIMARY KEY (id)
 );
 
