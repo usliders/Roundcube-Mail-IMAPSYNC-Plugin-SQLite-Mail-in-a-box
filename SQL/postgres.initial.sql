@@ -15,8 +15,7 @@ CREATE TABLE fetchmail (
     extra_options text,
     returned_text text,
     mda text,
-    date timestamp with time zone NOT NULL DEFAULT now() NOT NULL,
-	CONSTRAINT fetchmail_pkey PRIMARY KEY (id)
+    date timestamp with time zone NOT NULL DEFAULT now() NOT NULL
 );
 
 CREATE SEQUENCE fetchmail_id_seq
@@ -25,3 +24,9 @@ CREATE SEQUENCE fetchmail_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+	
+ALTER SEQUENCE fetchmail_id_seq OWNED BY fetchmail.id;
+
+ALTER TABLE ONLY fetchmail ALTER COLUMN id SET DEFAULT nextval('fetchmail_id_seq'::regclass);
+
+ALTER TABLE ONLY fetchmail ADD CONSTRAINT fetchmail_pkey PRIMARY KEY (id);
