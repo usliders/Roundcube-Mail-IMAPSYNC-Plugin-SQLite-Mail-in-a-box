@@ -14,7 +14,7 @@ CREATE TABLE `fetchmail` (
   `usessl` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `extra_options` text,
   `returned_text` text,
-  `mda` varchar(255) NOT NULL,
+  `mda` varchar(255) NOT NULL DEFAULT '',
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
