@@ -1,24 +1,24 @@
 CREATE TABLE fetchmail (
     id integer NOT NULL,
-    mailbox text NOT NULL,
-    active integer DEFAULT 1 NOT NULL,
-    src_server text NOT NULL,
-    src_auth text DEFAULT 'password'::text NOT NULL,
-    src_user text NOT NULL,
-    src_password text NOT NULL,
-    src_folder text,
+    mailbox character varying(255) DEFAULT ''::character varying NOT NULL,
+    active BOOLEAN DEFAULT 't' NOT NULL,
+    src_server character varying(255) DEFAULT ''::character varying NOT NULL,
+    src_auth character varying(15) DEFAULT 'password'::character varying NOT NULL,
+    src_user character varying(255) DEFAULT ''::character varying NOT NULL,
+    src_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    src_folder character varying(255) DEFAULT ''::character varying NOT NULL,
     poll_time integer DEFAULT 10 NOT NULL,
-    fetchall integer DEFAULT 0 NOT NULL,
-    keep integer DEFAULT 1 NOT NULL,
-    protocol text DEFAULT 'IMAP'::text NOT NULL,
-    usessl integer DEFAULT 1 NOT NULL,
-    sslcertck BOOLEAN NOT NULL DEFAULT 'f',
+    fetchall BOOLEAN DEFAULT 'f' NOT NULL,
+    keep BOOLEAN DEFAULT 't' NOT NULL,
+    protocol character varying(15) DEFAULT 'IMAP'::character varying NOT NULL,
+    usessl BOOLEAN DEFAULT 't' NOT NULL,
+    sslcertck BOOLEAN DEFAULT 'f' NOT NULL,
     sslcertpath character varying(255) DEFAULT ''::character varying,
     sslfingerprint character varying(255) DEFAULT ''::character varying,
     extra_options text,
     returned_text text,
-    mda text,
-    date timestamp with time zone NOT NULL DEFAULT now() NOT NULL
+    mda character varying(255) DEFAULT ''::character varying NOT NULL,
+    date timestamp with time zone DEFAULT now() NOT NULL
 );
 
 CREATE SEQUENCE fetchmail_id_seq
