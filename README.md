@@ -14,6 +14,8 @@
 ##Installation
 1. First you need to install **fetchmail** itself. For **Debian** you can do so by `sudo apt-get install fetchmail`
 2. Next you should extract **Roundcube fetchmail plugin** archive into your **Roundcube** `plugins` folder creating "fetchmail" folder there.
+  * You can do so either by using `composer` for which there is `composer.json`, still you need to follow further installation steps since those could not be accomplished with `composer`
+  * Alternatively you can download needed release from [Releases page](https://github.com/PF4Public/fetchmail/releases) unpacking it accordingly
 3. After that you need to enable newly installed plugin by adding it to **Roundcube** plugin list. For **Debian** related config file is `/etc/roundcube/main.inc.php` and relevant setting is 
 	```php
 	
@@ -25,6 +27,12 @@ Appending `, 'fetchmail'` to the list of plugins will suffice.
 	```php
 	
 	$rcmail_config ['fetchmail_limit'] = 10;
+	
+	```
+4. You may want to allow users to specify IMAP folder they wish to download mail from in `fetchmail/config/config.inc.php`. Default setting is 
+	```php
+	
+	$rcmail_config ['fetchmail_folder'] = false;
 	
 	```
 5. You need to create additional table in your database using one of the supplied `.sql` files. Another possibility is to use **Postfix Admin** table if you have it installed. If using **PostgreSQL** you may use schemas to share `fetchmail` table between **Roundcube** and **Postfix Admin**. Namely creating it in `public` schema, whereas every other table in it's appropriate schema, like `roundcube` and `postfixadmin`. Please refer to [the documentation](http://www.postgresql.org/docs/current/static/ddl-schemas.html) for more information.
