@@ -74,6 +74,7 @@ function row_del(id) {
 			row.appendChild(cell);
 			tbody.appendChild(row);
 		}
+		$('#fmn').text($('#fmn').text()-1);
 		parent.rcmail.display_message(rcmail.gettext('successfullydeleted',
 				'fetchmail'), 'confirmation');
 	}

@@ -319,7 +319,11 @@ class fetchmail extends rcube_plugin {
 	function gen_table($attrib) {
 		$rcmail = rcmail::get_instance ();
 		$mailbox = $rcmail->user->data ['username'];
-		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) . '</legend>' . "\n";
+		$sql = "SELECT * FROM fetchmail WHERE mailbox='$mailbox'";
+		$result = $rcmail->db->query ( $sql );
+		$num_rows = $rcmail->db->num_rows ( $result );
+		$limit = $rcmail->config->get ( 'fetchmail_limit' );
+		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) ." (<span id=\"fmn\">$num_rows</span>/$limit)". '</legend>' . "\n";
 		$out .= '<br />' . "\n";
 		$fetch_table = new html_table ( array (
 				'id' => 'fetch-table',
@@ -339,9 +343,7 @@ class fetchmail extends rcube_plugin {
 		$fetch_table->add_header ( array (
 				'width' => '26px' 
 		), '' );
-		$sql = "SELECT * FROM fetchmail WHERE mailbox='$mailbox'";
-		$result = $rcmail->db->query ( $sql );
-		$num_rows = $rcmail->db->num_rows ( $result );
+		
 		while ( $row = $rcmail->db->fetch_assoc ( $result ) ) {
 			$class = ($class == 'odd' ? 'even' : 'odd');
 			if ($row ['id'] == get_input_value ( '_id', RCUBE_INPUT_GET )) {
