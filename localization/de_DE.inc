@@ -1,15 +1,18 @@
 <?php
-
+//Anyone fluent in German feel free to review this file
 $labels = array();
 $labels['fetchmail'] = 'Fetchmail';
+//$labels['fetchmaildelete'] = 'Delete emails after receiving';
 $labels['fetchmailenabled'] = 'Aktiv';
 $labels['fetchmailfetchall'] = 'Alle eMails vom Server abrufen';
+//$labels['fetchmailfolder'] = 'Remote server folder';
 $labels['fetchmailkeep'] = 'Mails nach Empfang _nicht_ löschen';
 $labels['fetchmailpollinterval'] = 'Häufigkeit der Mailboxabfrage in Minuten';
-$labels['fetchmailserver'] = 'POP3/IMAP Server';
-$labels['fetchmailtyp'] = 'Typ';
+//$labels['fetchmailprotocol'] = 'Protocol';
+//$labels['fetchmailserver'] = 'Server hostname';
 $labels['fetchmailusessl'] = 'SSL bei Abruf verwenden';
 $labels['fetchmail_entries'] = 'Vorhandene Einträge';
+//$labels['fetchmail_to'] = 'Collect mail to';
 $labels['nofetch'] = 'Keine Einträge vorhanden';
 
 $messages = array();
