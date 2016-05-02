@@ -74,7 +74,7 @@ function row_del(id) {
 			row.appendChild(cell);
 			tbody.appendChild(row);
 		}
-		$('#fmn').text($('#fmn').text()-1);
+		$('#fetchmail_items_number').text($('#fetchmail_items_number').text()-1);
 		parent.rcmail.display_message(rcmail.gettext('successfullydeleted',
 				'fetchmail'), 'confirmation');
 	}
@@ -108,9 +108,9 @@ function row_edit(id, active) {
 function fetchmail_toggle_folder() {
 	switch ($('#fetchmailprotocol').val()) {
 	case "imap":
-		$("#fmf").show()
+		$("#fetchmail_folder_display").show()
 		break;
 	default:
-		$("#fmf").hide()
+		$("#fetchmail_folder_display").hide()
 	}
 }

@@ -240,7 +240,7 @@ class fetchmail extends rcube_plugin {
 				'maxlength' => 320,
 				'size' => 40
 		) );
-		$out .= sprintf ( "<tr id=\"fmf\"".(($protocol!="imap")?("style=\"display: none;\""):(""))."><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
+		$out .= sprintf ( "<tr id=\"fetchmail_folder_display\"".(($protocol!="imap")?("style=\"display: none;\""):(""))."><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
 		}
 		
 		$field_id = 'fetchmailpollinterval';
@@ -323,7 +323,7 @@ class fetchmail extends rcube_plugin {
 		$result = $rcmail->db->query ( $sql );
 		$num_rows = $rcmail->db->num_rows ( $result );
 		$limit = $rcmail->config->get ( 'fetchmail_limit' );
-		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) ." (<span id=\"fmn\">$num_rows</span>/$limit)". '</legend>' . "\n";
+		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) ." (<span id=\"fetchmail_items_number\">$num_rows</span>/$limit)". '</legend>' . "\n";
 		$out .= '<br />' . "\n";
 		$fetch_table = new html_table ( array (
 				'id' => 'fetch-table',
