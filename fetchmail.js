@@ -103,3 +103,13 @@ function row_edit(id, active) {
 		}
 	}
 }
+
+function fetchmail_toggle_folder() {
+	switch ($('#fetchmailprotocol').val()) {
+	case "imap":
+		$("#fmf").show()
+		break;
+	default:
+		$("#fmf").hide()
+	}
+}

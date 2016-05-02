@@ -158,6 +158,7 @@ class fetchmail extends rcube_plugin {
 		$fetchall = 0;
 		$keep = 1;
 		$enabled = 1;
+		$protocol = 'imap';
 		
 		// auslesen start
 		if ($id != '' || $id != 0) {
@@ -171,6 +172,7 @@ class fetchmail extends rcube_plugin {
 				$server = $row ['src_server'];
 				$user = $row ['src_user'];
 				$pass = base64_decode ( $row ['src_password'] );
+				$folder = $row ['src_folder'];
 				$pollinterval = $row ['poll_time'];
 				$fetchall = $row ['fetchall'];
 				$usessl = $row ['usessl'];
@@ -189,7 +191,8 @@ class fetchmail extends rcube_plugin {
 		$field_id = 'fetchmailprotocol';
 		$input_fetchmailprotocol = new html_select ( array (
 				'name' => '_fetchmailprotocol',
-				'id' => $field_id 
+				'id' => $field_id,
+				'onchange' => 'fetchmail_toggle_folder();' 
 		) );
 		$input_fetchmailprotocol->add ( array (
 				'IMAP',
@@ -227,6 +230,18 @@ class fetchmail extends rcube_plugin {
 				'autocomplete' => 'off' 
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'password' ) ), $input_fetchmailpass->show ( $pass ) );
+		
+		if ($rcmail->config->get('fetchmail_folder'))
+		{
+		$field_id = 'fetchmailfolder';
+		$input_fetchmailfolder = new html_inputfield ( array (
+				'name' => '_fetchmailfolder',
+				'id' => $field_id,
+				'maxlength' => 320,
+				'size' => 40
+		) );
+		$out .= sprintf ( "<tr id=\"fmf\"".(($protocol!="imap")?("style=\"display: none;\""):(""))."><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
+		}
 		
 		$field_id = 'fetchmailpollinterval';
 		$input_fetchmailpollinterval = new html_select ( array (

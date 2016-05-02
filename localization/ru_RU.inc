@@ -5,6 +5,7 @@ $labels['fetchmail'] = 'Fetchmail';
 $labels['fetchmaildelete'] = 'Удалить сообщения после загрузки';
 $labels['fetchmailenabled'] = 'Включить';
 $labels['fetchmailfetchall'] = 'Загружать все сообщения с сервера';
+$labels['fetchmailfolder'] = 'Папка на удалённом сервере';
 $labels['fetchmailkeep'] = 'Не удалять сообщения на сервере';
 $labels['fetchmailpollinterval'] = 'Частота проверки';
 $labels['fetchmailprotocol'] = 'Протокол';

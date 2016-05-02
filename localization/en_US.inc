@@ -5,6 +5,7 @@ $labels['fetchmail'] = 'Fetchmail';
 $labels['fetchmaildelete'] = 'Delete emails after receiving';
 $labels['fetchmailenabled'] = 'Enable';
 $labels['fetchmailfetchall'] = 'Fetch all e-mails from server';
+$labels['fetchmailfolder'] = 'Remote server folder';
 $labels['fetchmailkeep'] = 'Do not remove messages from the server';
 $labels['fetchmailpollinterval'] = 'Poll interval for the mailbox';
 $labels['fetchmailprotocol'] = 'Protocol';
