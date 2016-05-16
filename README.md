@@ -23,18 +23,7 @@
 	
 	```
 Appending `, 'fetchmail'` to the list of plugins will suffice.
-4. You may want to change the limit of external mailboxes per user allowed in `fetchmail/config/config.inc.php`. Default setting is 
-	```php
-	
-	$rcmail_config ['fetchmail_limit'] = 10;
-	
-	```
-4. You may want to allow users to specify IMAP folder they wish to download mail from in `fetchmail/config/config.inc.php`. Default setting is 
-	```php
-	
-	$rcmail_config ['fetchmail_folder'] = false;
-	
-	```
+4. Unless default settings are suitable for you, you need to configure the plugin. See the [settings section](#settings) for more information.
 5. You need to create additional table in your database using one of the supplied `.sql` files. Another possibility is to use **Postfix Admin** table if you have it installed. If using **PostgreSQL** you may use schemas to share `fetchmail` table between **Roundcube** and **Postfix Admin**. Namely creating it in `public` schema, whereas every other table in it's appropriate schema, like `roundcube` and `postfixadmin`. Please refer to [the documentation](http://www.postgresql.org/docs/current/static/ddl-schemas.html) for more information.
 6. You will need `fetchmail.pl` script from **Postfix Admin** distribution. If you don't have **Postfix Admin** installed, you can obtain required `fetchmail.pl` script from their repo  [trunk / ADDITIONS / fetchmail.pl](https://sourceforge.net/p/postfixadmin/code/HEAD/tree/trunk/ADDITIONS/fetchmail.pl). But be sure to get at least revision [[r1766]](https://sourceforge.net/p/postfixadmin/code/1766/), at which proper handling of `active` field introduced. Place it to where apropriate. For example, where your mailboxes are, e.g. `/var/mail`.
 7. Next adapt `fetchmail.pl` to your config. Most likely you want to change these settings:
@@ -53,8 +42,14 @@ Appending `, 'fetchmail'` to the list of plugins will suffice.
 	our $db_password="CHANGE_ME!";
 	```
 8. Next step is to configure **cron** for regular mail checking with `sudo crontab -u mail -e`. For example for 5 minute intervals add this: `*/5 * * * * /var/mail/fetchmail.pl >/dev/null`. Worth noting that even if you configure cron for a 5 minutes interval, fetchmail will still abide user configured checking interval. As a result setting bigger intervals here manifests them as intervals available to fetchmail, that is setting `0 * * * *` here overrides any user setting wich is less then hour
-9. You might also need to install `liblockfile-simple-perl` and `libsys-syslog-perl` or `libunix-syslog-perl` on **Debian**-based systems.
+9. You might also need to install `liblockfile-simple-perl` and ( `libsys-syslog-perl` or `libunix-syslog-perl` ) on **Debian**-based systems.
 10. Lastly there might be need to do `sudo mkdir /var/run/fetchmail; sudo chown mail:mail /var/run/fetchmail`
+
+##Settings
+In case you need to edit default-set settings, you may copy `config.inc.php.dist` to `config.inc.php` and edit setings as desired in the latter file, which will overrride defaults.
+* `$rcmail_config ['fetchmail_limit']` limits the number of external mailboxes per user allowed. Default is `10`.
+* `$rcmail_config ['fetchmail_folder']` whether to allow users to specify IMAP folder they wish to download mail from. Default is `false`.
+* `$rcmail_config ['fetchmail_mda']` allows you to specify mda field for fetchmail. This could be useful in case you want to deliver downloaded mail via MDA or LDA directly, rather than forwarding via SMTP or LMTP. For more information please refer to [fetchmail manual](http://www.fetchmail.info/fetchmail-man.html) and [fetchmail.pl](https://sourceforge.net/p/postfixadmin/code/HEAD/tree/trunk/ADDITIONS/fetchmail.pl) script. Default is `''`, i.e. not used.
 
 ##License
 This software distributed under the terms of the GNU General Public License as published by the Free Software Foundation
@@ -72,3 +67,6 @@ Arthur Mayer, https://github.com/flames
 
 * puzich, https://github.com/puzich
 * PF4Public, https://github.com/PF4Public
+
+#####Currently maintained by
+* PF4Public
