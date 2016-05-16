@@ -6,4 +6,7 @@ $rcmail_config ['fetchmail_limit'] = 10;
 // allow remote folder setting
 $rcmail_config ['fetchmail_folder'] = false;
 
+// mda for fetchmail
+$rcmail_config ['fetchmail_mda'] = '';
+
 ?>
