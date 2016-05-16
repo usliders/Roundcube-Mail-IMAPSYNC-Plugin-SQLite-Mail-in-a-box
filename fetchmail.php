@@ -13,7 +13,8 @@
 class fetchmail extends rcube_plugin {
 	public $task = 'settings';
 	function init() {
-		$this->load_config ();
+		$this->load_config('config.inc.php.dist');
+		$this->load_config();
 		$this->add_texts ( 'localization/', true );
 		$rcmail = rcmail::get_instance ();
 		$this->register_action ( 'plugin.fetchmail', array (
@@ -45,18 +46,6 @@ class fetchmail extends rcube_plugin {
 				'gen_table' 
 		) );
 		$this->include_script ( 'fetchmail.js' );
-	}
-	function load_config() {
-		$rcmail = rcmail::get_instance ();
-		$config = "plugins/fetchmail/config/config.inc.php";
-		if (file_exists ( $config ))
-			include $config;
-		else if (file_exists ( $config . ".dist" ))
-			include $config . ".dist";
-		if (is_array ( $rcmail_config )) {
-			$arr = array_merge ( $rcmail->config->all (), $rcmail_config );
-			$rcmail->config->merge ( $arr );
-		}
 	}
 	
 	function init_html() {
