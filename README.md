@@ -65,8 +65,7 @@ Arthur Mayer, https://github.com/flames
 
 ####List of contributors
 
-* puzich, https://github.com/puzich
-* PF4Public, https://github.com/PF4Public
+For a full list of contributors, refer to [Github project contributors page](https://github.com/PF4Public/fetchmail/graphs/contributors)
 
 #####Currently maintained by
-* PF4Public
+* [PF4Public](https://github.com/PF4Public)

@@ -21,6 +21,9 @@
 			"name" : "PF4Public",
 			"role" : "Developer",
 			"homepage" : "https://github.com/PF4Public"
+		}, {
+			"name" : "Github project contributors page",
+			"homepage" : "https://github.com/PF4Public/fetchmail/graphs/contributors"
 		}
 	],
 	"repositories" : [{
