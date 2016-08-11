@@ -54,18 +54,18 @@ In case you need to edit default-set settings, you may copy `config.inc.php.dist
 ##License
 This software distributed under the terms of the GNU General Public License as published by the Free Software Foundation
 
-Further details on the GPL license can be found at [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html)
+Further details on the GPL license can be found at http://www.gnu.org/licenses/gpl.html
 
 By contributing to **Roundcube fetchmail plugin**, authors release their contributed work under this license
 
 ##Acknowledgements
-####Original developer
+###Original developer
 
 Arthur Mayer, https://github.com/flames
 
-####List of contributors
+###List of contributors
 
-For a full list of contributors, refer to [Github project contributors page](https://github.com/PF4Public/fetchmail/graphs/contributors)
+For a complete list of contributors, refer to [Github project contributors page](https://github.com/PF4Public/fetchmail/graphs/contributors)
 
-#####Currently maintained by
+####Currently maintained by
 * [PF4Public](https://github.com/PF4Public)
