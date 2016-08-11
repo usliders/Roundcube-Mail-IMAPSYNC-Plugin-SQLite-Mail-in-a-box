@@ -1,22 +1,29 @@
 <?php
 
-/******************************************************************************
- * Fetchmail Roundcube Plugin (RC0.4 and above)
- * This software distributed under the terms of the GNU General Public License
+/*******************************************************************************
+ * Fetchmail Roundcube Plugin (Roundcube version 1.0-beta and above)
+ * This software distributed under the terms of the GNU General Public License 
  * as published by the Free Software Foundation
- * Further details on the GPL license can be found at 
+ * Further details on the GPL license can be found at
  * http://www.gnu.org/licenses/gpl.html
- * By contributing authors release their contributed work under this license
- * For more information see README.md file 
- *****************************************************************************/
+ * By contributing authors release their contributed work under this license 
+ * For more information see README.md file
+ ******************************************************************************/
 
 class fetchmail extends rcube_plugin {
 	public $task = 'settings';
+	private $rc;
 	function init() {
-		$this->load_config('config.inc.php.dist');
-		$this->load_config();
+		$this->rc = rcube::get_instance();
+		$this->load_config ( 'config.inc.php.dist' );
+		$this->load_config ();
 		$this->add_texts ( 'localization/', true );
-		$rcmail = rcmail::get_instance ();
+		
+		$this->add_hook ( 'settings_actions', array (
+				$this,
+				'settings_actions' 
+		) );
+		
 		$this->register_action ( 'plugin.fetchmail', array (
 				$this,
 				'init_html' 
@@ -47,44 +54,34 @@ class fetchmail extends rcube_plugin {
 		) );
 		$this->include_script ( 'fetchmail.js' );
 	}
-	
 	function init_html() {
-		$rcmail = rcmail::get_instance ();
-		$rcmail->output->set_pagetitle ( $this->gettext ( 'fetchmail' ) );
-		$rcmail->output->send ( 'fetchmail.fetchmail' );
+		$this->rc->output->set_pagetitle ( $this->gettext ( 'fetchmail' ) );
+		$this->rc->output->send ( 'fetchmail.fetchmail' );
 	}
-	
 	function disable() {
-		$rcmail = rcmail::get_instance ();
 		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
 		if ($id != 0 || $id != '') {
 			$sql = "UPDATE fetchmail SET active = '0' WHERE id = '$id'";
-			$update = $rcmail->db->query ( $sql );
+			$update = $this->rc->db->query ( $sql );
 		}
 	}
-	
 	function enable() {
-		$rcmail = rcmail::get_instance ();
 		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
 		if ($id != 0 || $id != '') {
 			$sql = "UPDATE fetchmail SET active = '1' WHERE id = '$id'";
-			$update = $rcmail->db->query ( $sql );
+			$update = $this->rc->db->query ( $sql );
 		}
 	}
-	
 	function del() {
-		$rcmail = rcmail::get_instance ();
 		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
 		if ($id != 0 || $id != '') {
 			$sql = "DELETE FROM fetchmail WHERE id = '$id'";
-			$delete = $rcmail->db->query ( $sql );
+			$delete = $this->rc->db->query ( $sql );
 		}
 	}
-	
 	function save() {
-		$rcmail = rcmail::get_instance ();
 		$id = get_input_value ( '_id', RCUBE_INPUT_POST );
-		$mailbox = $rcmail->user->data ['username'];
+		$mailbox = $this->rc->user->data ['username'];
 		$protocol = get_input_value ( '_fetchmailprotocol', RCUBE_INPUT_POST );
 		$server = get_input_value ( '_fetchmailserver', RCUBE_INPUT_POST );
 		$user = get_input_value ( '_fetchmailuser', RCUBE_INPUT_POST );
@@ -116,31 +113,29 @@ class fetchmail extends rcube_plugin {
 		} else {
 			$fetchall = 1;
 		}
-		$mda = $rcmail->config->get ( 'fetchmail_mda' );
+		$mda = $this->rc->config->get ( 'fetchmail_mda' );
 		if ($newentry or $id == '') {
 			$sql = "SELECT * FROM fetchmail WHERE mailbox='" . $mailbox . "'";
-			$result = $rcmail->db->query ( $sql );
-			$limit = $rcmail->config->get ( 'fetchmail_limit' );
-			$num_rows = $rcmail->db->num_rows ( $result );
+			$result = $this->rc->db->query ( $sql );
+			$limit = $this->rc->config->get ( 'fetchmail_limit' );
+			$num_rows = $this->rc->db->num_rows ( $result );
 			if ($num_rows < $limit) {
 				$sql = "INSERT INTO fetchmail (mailbox, active, src_server, src_user, src_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '$mda' )";
-				$insert = $rcmail->db->query ( $sql );
-				$rcmail->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
+				$insert = $this->rc->db->query ( $sql );
+				$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 			} else {
-				$rcmail->output->command ( 'display_message', 'Error: ' . $this->gettext ( 'fetchmaillimitreached' ), 'error' );
+				$this->rc->output->command ( 'display_message', 'Error: ' . $this->gettext ( 'fetchmaillimitreached' ), 'error' );
 			}
 		} else {
 			$sql = "UPDATE fetchmail SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '$mda' WHERE id = '$id'";
-			$update = $rcmail->db->query ( $sql );
-			$rcmail->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
+			$update = $this->rc->db->query ( $sql );
+			$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 		}
 		$this->init_html ();
 	}
-	
 	function gen_form() {
-		$rcmail = rcmail::get_instance ();
 		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
-		$mailbox = $rcmail->user->data ['username'];
+		$mailbox = $this->rc->user->data ['username'];
 		
 		// reasonable(?) defaults
 		$pollinterval = '10';
@@ -153,8 +148,8 @@ class fetchmail extends rcube_plugin {
 		// auslesen start
 		if ($id != '' || $id != 0) {
 			$sql = "SELECT * FROM fetchmail WHERE mailbox='" . $mailbox . "' AND id='" . $id . "'";
-			$result = $rcmail->db->query ( $sql );
-			while ( $row = $rcmail->db->fetch_assoc ( $result ) ) {
+			$result = $this->rc->db->query ( $sql );
+			while ( $row = $this->rc->db->fetch_assoc ( $result ) ) {
 				$enabled = $row ['active'];
 				$keep = $row ['keep'];
 				$mailget_id = $row ['id'];
@@ -221,16 +216,15 @@ class fetchmail extends rcube_plugin {
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'password' ) ), $input_fetchmailpass->show ( $pass ) );
 		
-		if ($rcmail->config->get('fetchmail_folder'))
-		{
-		$field_id = 'fetchmailfolder';
-		$input_fetchmailfolder = new html_inputfield ( array (
-				'name' => '_fetchmailfolder',
-				'id' => $field_id,
-				'maxlength' => 320,
-				'size' => 40
-		) );
-		$out .= sprintf ( "<tr id=\"fetchmail_folder_display\"".(($protocol!="imap")?("style=\"display: none;\""):(""))."><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
+		if ($this->rc->config->get ( 'fetchmail_folder' )) {
+			$field_id = 'fetchmailfolder';
+			$input_fetchmailfolder = new html_inputfield ( array (
+					'name' => '_fetchmailfolder',
+					'id' => $field_id,
+					'maxlength' => 320,
+					'size' => 40 
+			) );
+			$out .= sprintf ( "<tr id=\"fetchmail_folder_display\"" . (($protocol != "imap") ? ("style=\"display: none;\"") : ("")) . "><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
 		}
 		
 		$field_id = 'fetchmailpollinterval';
@@ -302,18 +296,16 @@ class fetchmail extends rcube_plugin {
 		$out .= "\n</table>";
 		$out .= '<br />' . "\n";
 		$out .= "</fieldset>\n";
-		$rcmail->output->add_gui_object ( 'fetchmailform', 'fetchmail-form' );
+		$this->rc->output->add_gui_object ( 'fetchmailform', 'fetchmail-form' );
 		return $out;
 	}
-	
 	function gen_table($attrib) {
-		$rcmail = rcmail::get_instance ();
-		$mailbox = $rcmail->user->data ['username'];
+		$mailbox = $this->rc->user->data ['username'];
 		$sql = "SELECT * FROM fetchmail WHERE mailbox='$mailbox'";
-		$result = $rcmail->db->query ( $sql );
-		$num_rows = $rcmail->db->num_rows ( $result );
-		$limit = $rcmail->config->get ( 'fetchmail_limit' );
-		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) ." (<span id=\"fetchmail_items_number\">$num_rows</span>/$limit)". '</legend>' . "\n";
+		$result = $this->rc->db->query ( $sql );
+		$num_rows = $this->rc->db->num_rows ( $result );
+		$limit = $this->rc->config->get ( 'fetchmail_limit' );
+		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) . " (<span id=\"fetchmail_items_number\">$num_rows</span>/$limit)" . '</legend>' . "\n";
 		$out .= '<br />' . "\n";
 		$fetch_table = new html_table ( array (
 				'id' => 'fetch-table',
@@ -334,7 +326,7 @@ class fetchmail extends rcube_plugin {
 				'width' => '26px' 
 		), '' );
 		
-		while ( $row = $rcmail->db->fetch_assoc ( $result ) ) {
+		while ( $row = $this->rc->db->fetch_assoc ( $result ) ) {
 			$class = ($class == 'odd' ? 'even' : 'odd');
 			if ($row ['id'] == get_input_value ( '_id', RCUBE_INPUT_GET )) {
 				$class = 'selected';
@@ -359,7 +351,6 @@ class fetchmail extends rcube_plugin {
 		$out .= "</fieldset>\n";
 		return $out;
 	}
-	
 	private function _fetch_row($fetch_table, $col_remoteserver, $col_remoteuser, $active, $id, $attrib) {
 		$fetch_table->add ( array (
 				'onclick' => 'fetchmail_edit(' . $id . ');' 
@@ -398,6 +389,14 @@ class fetchmail extends rcube_plugin {
 				'onclick' => 'row_del(' . $id . ');' 
 		), $del_button );
 		return $fetch_table;
+	}
+	function settings_actions($args) {
+		$args ['actions'] [] = array (
+				'action' => 'plugin.fetchmail',
+				'label' => 'fetchmail.fetchmail',
+				'title' => 'fetchmail.fetchmail' 
+		);
+		return $args;
 	}
 }
 
