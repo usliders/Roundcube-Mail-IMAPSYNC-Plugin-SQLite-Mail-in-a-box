@@ -20,7 +20,7 @@
 				<form name="fetchmailform"
 					action="./?_task=settings&_action=plugin.fetchmail.save"
 					method="post">
-					<roundcube:object name="fetchmail_form" />
+					<roundcube:object name="plugin.fetchmail_form" />
 				</form>
 			</div>
 
@@ -32,7 +32,7 @@
 			</div>
 
 			<div id="mytable">
-				<roundcube:object name="fetchmail_table" class="fetchmail-table"
+				<roundcube:object name="plugin.fetchmail_table" class="fetchmail-table"
 					cellspacing="0" deleteIcon="/this/delete.png"
 					enableIcon="/this/enabled.png" disableIcon="/this/disabled.png" />
 			</div>

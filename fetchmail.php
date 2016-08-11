@@ -9,6 +9,7 @@
  * By contributing authors release their contributed work under this license 
  * For more information see README.md file
  ******************************************************************************/
+
 class fetchmail extends rcube_plugin {
 	public $task = 'settings';
 	private $rc;
@@ -44,18 +45,18 @@ class fetchmail extends rcube_plugin {
 				'disable' 
 		) );
 		if (strpos ( $this->rc->action, 'plugin.fetchmail' ) === 0) {
-			$this->api->output->add_handler ( 'fetchmail_form', array (
-					$this,
-					'gen_form' 
-			) );
-			$this->api->output->add_handler ( 'fetchmail_table', array (
-					$this,
-					'gen_table' 
-			) );
 			$this->include_script ( 'fetchmail.js' );
 		}
 	}
 	function init_html() {
+		$this->register_handler ( 'plugin.fetchmail_form', array (
+				$this,
+				'gen_form' 
+		) );
+		$this->register_handler ( 'plugin.fetchmail_table', array (
+				$this,
+				'gen_table' 
+		) );
 		$this->rc->output->set_pagetitle ( $this->gettext ( 'fetchmail' ) );
 		$this->rc->output->send ( 'fetchmail.fetchmail' );
 	}
