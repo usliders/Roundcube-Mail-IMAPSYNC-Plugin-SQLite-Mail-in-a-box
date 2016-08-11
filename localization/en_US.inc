@@ -25,6 +25,6 @@ $messages['successfullydeleted'] = 'Deleted successfully!';
 $messages['successfullydisabled'] = 'Disabled successfully!';
 $messages['successfullyenabled'] = 'Enabled successfully!';
 $messages['successfullysaved'] = 'Saved successfully!';
-$messages['textempty'] = 'One or more fields are empty';
+$messages['textempty'] = 'Required fields are empty';
 
 ?>

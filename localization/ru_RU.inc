@@ -25,6 +25,6 @@ $messages['successfullydeleted'] = 'Успешно удалено!';
 $messages['successfullydisabled'] = 'Успешно отключено!';
 $messages['successfullyenabled'] = 'Успешно включено!';
 $messages['successfullysaved'] = 'Успешно сохранено!';
-$messages['textempty'] = 'Одно или несколько полей не заполнены';
+$messages['textempty'] = 'Не заполнены обязательные поля';
 
 ?>
