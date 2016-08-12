@@ -59,7 +59,7 @@ Further details on the GPL license can be found at http://www.gnu.org/licenses/g
 By contributing to **Roundcube fetchmail plugin**, authors release their contributed work under this license
 
 ##Acknowledgements
-###Original developer
+###Original author
 
 Arthur Mayer, https://github.com/flames
 
