@@ -85,6 +85,7 @@ class fetchmail extends rcube_plugin {
 		$id = get_input_value ( '_id', RCUBE_INPUT_POST );
 		$mailbox = $this->rc->user->data ['username'];
 		$protocol = get_input_value ( '_fetchmailprotocol', RCUBE_INPUT_POST );
+		$protocol = strtoupper($protocol); //TODO: temporary
 		$server = get_input_value ( '_fetchmailserver', RCUBE_INPUT_POST );
 		$user = get_input_value ( '_fetchmailuser', RCUBE_INPUT_POST );
 		$pass = base64_encode ( get_input_value ( '_fetchmailpass', RCUBE_INPUT_POST ) );
@@ -185,8 +186,8 @@ class fetchmail extends rcube_plugin {
 				'IMAP',
 				'POP3' 
 		), array (
-				'imap',
-				'pop3' 
+				'IMAP',
+				'POP3' 
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailprotocol' ) ), $input_fetchmailprotocol->show ( $protocol ) );
 		
