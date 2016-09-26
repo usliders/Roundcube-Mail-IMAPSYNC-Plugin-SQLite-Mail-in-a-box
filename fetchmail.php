@@ -9,7 +9,6 @@
  * By contributing authors release their contributed work under this license 
  * For more information see README.md file
  ******************************************************************************/
-
 class fetchmail extends rcube_plugin {
 	public $task = 'settings';
 	private $rc;
@@ -146,7 +145,7 @@ class fetchmail extends rcube_plugin {
 		$fetchall = 0;
 		$keep = 1;
 		$enabled = 1;
-		$protocol = 'imap';
+		$protocol = 'IMAP';
 		
 		// auslesen start
 		if ($id != '' || $id != 0) {
@@ -308,20 +307,25 @@ class fetchmail extends rcube_plugin {
 		$result = $this->rc->db->query ( $sql );
 		$num_rows = $this->rc->db->num_rows ( $result );
 		$limit = $this->rc->config->get ( 'fetchmail_limit' );
+		$show_folder = $this->rc->config->get ( 'fetchmail_folder' );
 		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) . " (<span id=\"fetchmail_items_number\">$num_rows</span>/$limit)" . '</legend>' . "\n";
 		$out .= '<br />' . "\n";
 		$fetch_table = new html_table ( array (
 				'id' => 'fetch-table',
 				'class' => 'records-table',
 				'cellspacing' => '0',
-				'cols' => 4 
+				'cols' => ($show_folder)?5:4  
 		) );
 		$fetch_table->add_header ( array (
-				'width' => '184px' 
+				'width' => ($show_folder)?('100px'):('184px')  
 		), $this->gettext ( 'fetchmailserver' ) );
 		$fetch_table->add_header ( array (
-				'width' => '184px' 
+				'width' => ($show_folder)?('100px'):('184px') 
 		), $this->gettext ( 'username' ) );
+		if ($show_folder){
+			$fetch_table->add_header ( array (
+					'width' => '100px'
+			), $this->gettext ( 'fetchmailfolder' ) );}
 		$fetch_table->add_header ( array (
 				'width' => '26px' 
 		), '' );
@@ -338,7 +342,7 @@ class fetchmail extends rcube_plugin {
 					'class' => $class,
 					'id' => 'fetch_' . $row ['id'] 
 			) );
-			$this->_fetch_row ( $fetch_table, $row ['src_server'], $row ['src_user'], $row ['active'], $row ['id'], $attrib );
+			$this->_fetch_row ( $fetch_table, $row ['src_server'], $row ['src_user'], $row ['src_folder'], $row ['active'], $row ['id'], $attrib );
 		}
 		if ($num_rows == 0) {
 			$fetch_table->add ( array (
@@ -354,13 +358,17 @@ class fetchmail extends rcube_plugin {
 		$out .= "</fieldset>\n";
 		return $out;
 	}
-	private function _fetch_row($fetch_table, $col_remoteserver, $col_remoteuser, $active, $id, $attrib) {
+	private function _fetch_row($fetch_table, $col_remoteserver, $col_remoteuser, $col_folder, $active, $id, $attrib) {
+		$show_folder = $this->rc->config->get ( 'fetchmail_folder' );
 		$fetch_table->add ( array (
 				'onclick' => 'fetchmail_edit(' . $id . ');' 
 		), $col_remoteserver );
 		$fetch_table->add ( array (
 				'onclick' => 'fetchmail_edit(' . $id . ');' 
 		), $col_remoteuser );
+		if ($show_folder){$fetch_table->add ( array (
+				'onclick' => 'fetchmail_edit(' . $id . ');' 
+		), $col_folder );}
 		$disable_button = html::img ( array (
 				'src' => $attrib ['enableicon'],
 				'alt' => $this->gettext ( 'enabled' ),
