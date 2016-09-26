@@ -46,7 +46,7 @@ Appending `, 'fetchmail'` to the list of plugins will suffice.
 10. Lastly there might be need to do `sudo mkdir /var/run/fetchmail; sudo chown mail:mail /var/run/fetchmail`
 
 ##Settings
-In case you need to edit default-set settings, you may copy `config.inc.php.dist` to `config.inc.php` and edit setings as desired in the latter file, which will overrride defaults.
+In case you need to edit default-set settings, you may copy `config.inc.php.dist` to `config.inc.php` and edit setings as desired in the latter file, which will override defaults.
 * `$rcmail_config ['fetchmail_limit']` limits the number of external mailboxes per user allowed. Default is `10`.
 * `$rcmail_config ['fetchmail_folder']` whether to allow users to specify IMAP folder they wish to download mail from. Default is `false`.
 * `$rcmail_config ['fetchmail_mda']` allows you to specify mda field for fetchmail. This could be useful in case you want to deliver downloaded mail via MDA or LDA directly, rather than forwarding via SMTP or LMTP. For more information please refer to [fetchmail manual](http://www.fetchmail.info/fetchmail-man.html) and [fetchmail.pl](https://sourceforge.net/p/postfixadmin/code/HEAD/tree/trunk/ADDITIONS/fetchmail.pl) script. Default is `''`, i.e. not used.
