@@ -2,17 +2,17 @@
 //Anyone fluent in German feel free to review this file
 $labels = array();
 $labels['fetchmail'] = 'Fetchmail';
-//$labels['fetchmaildelete'] = 'Delete emails after receiving';
+$labels['fetchmaildelete'] = 'Nach dem Abruf E-Mails löschen';
 $labels['fetchmailenabled'] = 'Aktiv';
 $labels['fetchmailfetchall'] = 'Alle E-Mails abrufen';
-$labels['fetchmailfolder'] = 'Nur E-Mails aus diesem Ordner abrufen';
-$labels['fetchmailkeep'] = 'E-Mails nachdem Empfang <strong>nicht</strong> löschen';
-$labels['fetchmailpollinterval'] = 'Häufigkeit der Abfrage in Minuten';
+$labels['fetchmailfolder'] = 'Nur diesen Ordner abrufen';
+$labels['fetchmailkeep'] = 'E-Mails <strong>nicht</strong> löschen';
+$labels['fetchmailpollinterval'] = 'Abfrage-Intervall in Minuten';
 $labels['fetchmailprotocol'] = 'Protokoll';
 $labels['fetchmailserver'] = 'Server-Hostname';
-$labels['fetchmailusessl'] = 'Bei Abruf SSL verwenden';
+$labels['fetchmailusessl'] = 'SSL aktivieren';
 $labels['fetchmail_entries'] = 'Vorhandene Einträge';
-//$labels['fetchmail_to'] = 'Collect mail to';
+$labels['fetchmail_to'] = 'Hole E-Mails von';
 $labels['nofetch'] = 'Keine Einträge vorhanden';
 
 $messages = array();
@@ -25,6 +25,6 @@ $messages['successfullydeleted'] = 'Erfolgreich gelöscht!';
 $messages['successfullydisabled'] = 'Erfolgreich deaktiviert!';
 $messages['successfullyenabled'] = 'Erfolgreich aktiviert!';
 $messages['successfullysaved'] = 'Erfolgreich gespeichert!';
-$messages['textempty'] = 'Einige Felder sind leer'; //TODO: some fields -> required fields
+$messages['textempty'] = 'Einige Felder sind leer';
 
 ?>
