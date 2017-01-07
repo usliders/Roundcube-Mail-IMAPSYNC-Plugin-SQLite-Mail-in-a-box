@@ -63,41 +63,41 @@
 		$this->rc->output->send ( 'fetchmail.fetchmail' );
 	}
 	function disable() {
-		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
+		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET );
 		if ($id != 0 || $id != '') {
 			$sql = "UPDATE fetchmail SET active = '0' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 		}
 	}
 	function enable() {
-		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
+		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET );
 		if ($id != 0 || $id != '') {
 			$sql = "UPDATE fetchmail SET active = '1' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 		}
 	}
 	function del() {
-		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
+		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET );
 		if ($id != 0 || $id != '') {
 			$sql = "DELETE FROM fetchmail WHERE id = '$id'";
 			$delete = $this->rc->db->query ( $sql );
 		}
 	}
 	function save() {
-		$id = get_input_value ( '_id', RCUBE_INPUT_POST );
+		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_POST );
 		$mailbox = $this->rc->user->data ['username'];
-		$protocol = get_input_value ( '_fetchmailprotocol', RCUBE_INPUT_POST );
+		$protocol = rcube_utils::get_input_value ( '_fetchmailprotocol', rcube_utils::INPUT_POST );
 		$protocol = strtoupper ( $protocol ); // TODO: temporary
-		$server = get_input_value ( '_fetchmailserver', RCUBE_INPUT_POST );
-		$user = get_input_value ( '_fetchmailuser', RCUBE_INPUT_POST );
-		$pass = base64_encode ( get_input_value ( '_fetchmailpass', RCUBE_INPUT_POST ) );
-		$folder = get_input_value ( '_fetchmailfolder', RCUBE_INPUT_POST );
-		$pollinterval = get_input_value ( '_fetchmailpollinterval', RCUBE_INPUT_POST );
-		$keep = get_input_value ( '_fetchmailkeep', RCUBE_INPUT_POST );
-		$usessl = get_input_value ( '_fetchmailusessl', RCUBE_INPUT_POST );
-		$fetchall = get_input_value ( '_fetchmailfetchall', RCUBE_INPUT_POST );
-		$enabled = get_input_value ( '_fetchmailenabled', RCUBE_INPUT_POST );
-		$newentry = get_input_value ( '_fetchmailnewentry', RCUBE_INPUT_POST );
+		$server = rcube_utils::get_input_value ( '_fetchmailserver', rcube_utils::INPUT_POST );
+		$user = rcube_utils::get_input_value ( '_fetchmailuser', rcube_utils::INPUT_POST );
+		$pass = base64_encode ( rcube_utils::get_input_value ( '_fetchmailpass', rcube_utils::INPUT_POST ) );
+		$folder = rcube_utils::get_input_value ( '_fetchmailfolder', rcube_utils::INPUT_POST );
+		$pollinterval = rcube_utils::get_input_value ( '_fetchmailpollinterval', rcube_utils::INPUT_POST );
+		$keep = rcube_utils::get_input_value ( '_fetchmailkeep', rcube_utils::INPUT_POST );
+		$usessl = rcube_utils::get_input_value ( '_fetchmailusessl', rcube_utils::INPUT_POST );
+		$fetchall = rcube_utils::get_input_value ( '_fetchmailfetchall', rcube_utils::INPUT_POST );
+		$enabled = rcube_utils::get_input_value ( '_fetchmailenabled', rcube_utils::INPUT_POST );
+		$newentry = rcube_utils::get_input_value ( '_fetchmailnewentry', rcube_utils::INPUT_POST );
 		if (! $keep) {
 			$keep = 0;
 		} else {
@@ -139,7 +139,7 @@
 		$this->init_html ();
 	}
 	function gen_form() {
-		$id = get_input_value ( '_id', RCUBE_INPUT_GET );
+		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET );
 		$mailbox = $this->rc->user->data ['username'];
 		
 		// reasonable(?) defaults
@@ -191,7 +191,7 @@
 				'IMAP',
 				'POP3' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailprotocol' ) ), $input_fetchmailprotocol->show ( $protocol ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailprotocol' ) ), $input_fetchmailprotocol->show ( $protocol ) );
 		
 		$field_id = 'fetchmailserver';
 		$input_fetchmailserver = new html_inputfield ( array (
@@ -200,7 +200,7 @@
 				'maxlength' => 320,
 				'size' => 40 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailserver' ) ), $input_fetchmailserver->show ( $server ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailserver' ) ), $input_fetchmailserver->show ( $server ) );
 		
 		$field_id = 'fetchmailuser';
 		$input_fetchmailuser = new html_inputfield ( array (
@@ -209,7 +209,7 @@
 				'maxlength' => 320,
 				'size' => 40 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'username' ) ), $input_fetchmailuser->show ( $user ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'username' ) ), $input_fetchmailuser->show ( $user ) );
 		
 		$field_id = 'fetchmailpass';
 		$input_fetchmailpass = new html_passwordfield ( array (
@@ -219,7 +219,7 @@
 				'size' => 40,
 				'autocomplete' => 'off' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'password' ) ), $input_fetchmailpass->show ( $pass ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'password' ) ), $input_fetchmailpass->show ( $pass ) );
 		
 		if ($this->show_folder) {
 			$field_id = 'fetchmailfolder';
@@ -229,7 +229,7 @@
 					'maxlength' => 320,
 					'size' => 40 
 			) );
-			$out .= sprintf ( "<tr id=\"fetchmail_folder_display\"" . (($protocol != "IMAP") ? ("style=\"display: none;\"") : ("")) . "><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
+			$out .= sprintf ( "<tr id=\"fetchmail_folder_display\"" . (($protocol != "IMAP") ? ("style=\"display: none;\"") : ("")) . "><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
 		}
 		
 		$field_id = 'fetchmailpollinterval';
@@ -254,7 +254,7 @@
 				'30',
 				'60' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailpollinterval' ) ), $input_fetchmailpollinterval->show ( "$pollinterval" ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailpollinterval' ) ), $input_fetchmailpollinterval->show ( "$pollinterval" ) );
 		
 		$field_id = 'fetchmailkeep';
 		$input_fetchmailkeep = new html_checkbox ( array (
@@ -262,7 +262,7 @@
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailkeep' ) ), $input_fetchmailkeep->show ( $keep ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailkeep' ) ), $input_fetchmailkeep->show ( $keep ) );
 		
 		$field_id = 'fetchmailfetchall';
 		$input_fetchmailfetchall = new html_checkbox ( array (
@@ -270,7 +270,7 @@
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailfetchall' ) ), $input_fetchmailfetchall->show ( $fetchall ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailfetchall' ) ), $input_fetchmailfetchall->show ( $fetchall ) );
 		
 		$field_id = 'fetchmailusessl';
 		$input_fetchmailusessl = new html_checkbox ( array (
@@ -278,7 +278,7 @@
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailusessl' ) ), $input_fetchmailusessl->show ( $usessl ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailusessl' ) ), $input_fetchmailusessl->show ( $usessl ) );
 		
 		$field_id = 'fetchmailenabled';
 		$input_fetchmailenabled = new html_checkbox ( array (
@@ -286,7 +286,7 @@
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailenabled' ) ), $input_fetchmailenabled->show ( $enabled ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailenabled' ) ), $input_fetchmailenabled->show ( $enabled ) );
 		
 		if ($id != '' || $id != 0) {
 			$field_id = 'fetchmailnewentry';
@@ -295,7 +295,7 @@
 					'id' => $field_id,
 					'value' => '1' 
 			) );
-			$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rep_specialchars_output ( $this->gettext ( 'fetchmailnewentry' ) ), $input_fetchmailnewentry->show ( $newentry ) );
+			$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailnewentry' ) ), $input_fetchmailnewentry->show ( $newentry ) );
 		}
 		
 		$out .= "\n</table>";
@@ -338,7 +338,7 @@
 		
 		while ( $row = $this->rc->db->fetch_assoc ( $result ) ) {
 			$class = ($class == 'odd' ? 'even' : 'odd');
-			if ($row ['id'] == get_input_value ( '_id', RCUBE_INPUT_GET )) {
+			if ($row ['id'] == rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET )) {
 				$class = 'selected';
 			}
 			$fetch_table->set_row_attribs ( array (
@@ -350,7 +350,7 @@
 		if ($num_rows == 0) {
 			$fetch_table->add ( array (
 					'colspan' => '4' 
-			), rep_specialchars_output ( $this->gettext ( 'nofetch' ) ) );
+			), rcube_utils::rep_specialchars_output ( $this->gettext ( 'nofetch' ) ) );
 			$fetch_table->set_row_attribs ( array (
 					'class' => 'odd' 
 			) );

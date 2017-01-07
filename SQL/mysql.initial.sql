@@ -1,4 +1,4 @@
-CREATE TABLE `fetchmail` (
+CREATE TABLE IF NOT EXISTS `fetchmail` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mailbox` varchar(255) NOT NULL,
   `active` int(1) NOT NULL DEFAULT '1',
