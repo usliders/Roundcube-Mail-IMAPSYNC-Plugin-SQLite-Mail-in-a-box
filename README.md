@@ -6,23 +6,22 @@
 1. **Roundcube**
 2. Database (**MySQL**)
 3. **imapsync** itself
-4. **External repo** -> `imapsync.pl` script -- coming soon
 
 ##Installation
 1. First you need to install **imapsync** itself. For **Debian** you can do so by `sudo apt-get install imapsync`
 2. Next you should extract **Roundcube imapsync plugin** archive into your **Roundcube** `plugins` folder creating "imapsync" folder there.
   * You can do so either by using `composer` for which there is `composer.json`, still you need to follow further installation steps since those could not be accomplished with `composer`
   * Alternatively you can clone this github repo -- `git clone https://github.com/server-gurus/RCimapSync.git`
-3. After that you need to enable newly installed plugin by adding it to **Roundcube** plugin list. For **Debian** related config file is `/etc/roundcube/main.inc.php` and relevant setting is 
+3. After that you need to enable newly installed plugin by adding it to **Roundcube** plugin list. For **Debian** related config file is `/etc/roundcube/main.inc.php`, for Plesk it is `config.inc.php` and relevant setting is 
 	```php
 	
-	$rcmail_config ['plugins'] = array();
+	$config['plugins'] = array('plugin1','plugin2',[...],'imapsync');
 	
 	```
 Appending `, 'imapsync'` to the list of plugins will suffice.
 4. Unless default settings are suitable for you, you need to configure the plugin. See the [settings section](#settings) for more information.
-5. You need to create additional table in your database using one of the supplied `.sql` files. 
-6. You will need `imapsync.pl` script from external repo -- coming soon. Place it to where apropriate. For example, where your mailboxes are, e.g. `/var/mail`.
+5. You need to create additional table in your roundcube database using one of the supplied `.sql` files. 
+6. You will need `imapsync.pl` script from /bin/ folder -- coming soon. Place it to where apropriate or let it in his place - your security, your choice.
 7. Next adapt `imapsync.pl` to your config. Most likely you want to change these settings:
 	```perl
 	my $db_host="127.0.0.1";
