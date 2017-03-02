@@ -10,7 +10,7 @@
  * For more information see README.md file
  ******************************************************************************/
 
- class fetchmail extends rcube_plugin {
+ class imapsync extends rcube_plugin {
 	public $task = 'settings';
 	private $rc;
 	private $show_folder;
@@ -19,35 +19,35 @@
 		$this->load_config ( 'config.inc.php.dist' );
 		$this->load_config ();
 		$this->add_texts ( 'localization/', true );
-		$this->show_folder = $this->rc->config->get ( 'fetchmail_folder' );
+		$this->show_folder = $this->rc->config->get ( 'imapsync_folder' );
 		
 		$this->add_hook ( 'settings_actions', array (
 				$this,
 				'settings_actions' 
 		) );
 		
-		$this->register_action ( 'plugin.fetchmail', array (
+		$this->register_action ( 'plugin.imapsync', array (
 				$this,
 				'init_html' 
 		) );
-		$this->register_action ( 'plugin.fetchmail.save', array (
+		$this->register_action ( 'plugin.imapsync.save', array (
 				$this,
 				'save' 
 		) );
-		$this->register_action ( 'plugin.fetchmail.del', array (
+		$this->register_action ( 'plugin.imapsync.del', array (
 				$this,
 				'del' 
 		) );
-		$this->register_action ( 'plugin.fetchmail.enable', array (
+		$this->register_action ( 'plugin.imapsync.enable', array (
 				$this,
 				'enable' 
 		) );
-		$this->register_action ( 'plugin.fetchmail.disable', array (
+		$this->register_action ( 'plugin.imapsync.disable', array (
 				$this,
 				'disable' 
 		) );
-		if (strpos ( $this->rc->action, 'plugin.fetchmail' ) === 0) {
-			$this->include_script ( 'fetchmail.js' );
+		if (strpos ( $this->rc->action, 'plugin.imapsync' ) === 0) {
+			$this->include_script ( 'imapsync.js' );
 		}
 	}
 	function init_html() {
@@ -118,21 +118,21 @@
 		} else {
 			$fetchall = 1;
 		}
-		$mda = $this->rc->config->get ( 'fetchmail_mda' );
+//		$mda = $this->rc->config->get ( 'fetchmail_mda' );
 		if ($newentry or $id == '') {
 			$sql = "SELECT * FROM fetchmail WHERE mailbox='" . $mailbox . "'";
 			$result = $this->rc->db->query ( $sql );
 			$limit = $this->rc->config->get ( 'fetchmail_limit' );
 			$num_rows = $this->rc->db->num_rows ( $result );
 			if ($num_rows < $limit) {
-				$sql = "INSERT INTO fetchmail (mailbox, active, src_server, src_user, src_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '$mda' )";
+				$sql = "INSERT INTO fetchmail (mailbox, active, src_server, src_user, src_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '' )";
 				$insert = $this->rc->db->query ( $sql );
 				$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 			} else {
 				$this->rc->output->command ( 'display_message', 'Error: ' . $this->gettext ( 'fetchmaillimitreached' ), 'error' );
 			}
 		} else {
-			$sql = "UPDATE fetchmail SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '$mda' WHERE id = '$id'";
+			$sql = "UPDATE fetchmail SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 			$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 		}
