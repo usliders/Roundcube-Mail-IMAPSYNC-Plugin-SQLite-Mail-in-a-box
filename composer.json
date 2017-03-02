@@ -1,0 +1,46 @@
+{
+	"name" : "ServerGurus/RCimapSync",
+	"type" : "roundcube-plugin",
+	"description" : "Roundcube fetchmail plugin is a Roundcube plugin, which allows users to download their mail from external mailboxes.",
+	"keywords" : [
+		"fetchmail",
+		"download",
+		"mailbox"
+	],
+	"homepage" : "https://github.com/server-gurus/RCimapSync",
+	"license" : "GPL",
+	"authors" : [{
+			"name" : "Arthur Mayer",
+			"role" : "Retired developer",
+			"homepage" : "https://github.com/flames"
+		}, {
+			"name" : "puzich",
+			"role" : "Retired developer",
+			"homepage" : "https://github.com/puzich"
+		}, {
+			"name" : "PF4Public",
+			"role" : "Developer",
+			"homepage" : "https://github.com/PF4Public"
+		}, {
+			"name" : "Github project contributors page",
+			"homepage" : "https://github.com/server-gurus/RCimapSync/graphs/contributors"
+		}
+	],
+	"repositories" : [{
+			"type" : "composer",
+			"url" : "https://plugins.roundcube.net"
+		}
+	],
+	"require" : {
+		"roundcube/plugin-installer" : ">=0.1.6"
+	},
+	"support" : {
+		"issues" : "https://github.com/server-gurus/RCimapSync/issues",
+		"source" : "https://github.com/server-gurus/RCimapSync"
+	},
+	"extra" : {
+		"roundcube" : {
+			"sql-dir" : "SQL"
+		}
+	}
+}
