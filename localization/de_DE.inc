@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //Anyone fluent in German feel free to review this file
 $labels = array();
 $labels['fetchmail'] = 'Fetchmail';
