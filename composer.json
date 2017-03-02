@@ -1,7 +1,7 @@
 {
 	"name" : "ServerGurus/RCimapSync",
 	"type" : "roundcube-plugin",
-	"description" : "Roundcube fetchmail plugin is a Roundcube plugin, which allows users to download their mail from external mailboxes.",
+	"description" : "Roundcube imapsync plugin is a Roundcube plugin, which allows users to sync their mail from external mailboxes incl. IMAP-Folder.",
 	"keywords" : [
 		"fetchmail",
 		"download",
