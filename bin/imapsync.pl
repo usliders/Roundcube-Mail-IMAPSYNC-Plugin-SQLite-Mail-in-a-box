@@ -15,8 +15,8 @@ $lockmgr->lock($lock_file) || &log_and_die("can't lock ${lock_file}");
 
 my $db_host="localhost";
 my $db_name="roundcubemail";
-my $db_username="fetchmail";
-my $db_password="_Wtu8ofzt5p4";
+my $db_username="imapsync";
+my $db_password="OnePassword";
 
 my $DBH = DBI->connect('DBI:mysql:database='.$db_name.';host='.$db_host, $db_username, $db_password) || &log_and_die("cannot connect the database");
 
