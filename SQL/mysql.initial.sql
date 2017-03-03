@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS `fetchmail` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `imapsync` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `mailbox` varchar(255) NOT NULL,
   `active` int(1) NOT NULL DEFAULT '1',
   `src_server` varchar(255) NOT NULL,
@@ -7,17 +7,22 @@ CREATE TABLE IF NOT EXISTS `fetchmail` (
   `src_user` varchar(255) NOT NULL,
   `src_password` varchar(255) NOT NULL,
   `src_folder` varchar(255) NOT NULL,
-  `poll_time` int(11) unsigned NOT NULL DEFAULT '10',
-  `fetchall` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `keep` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `dest_password` varchar(255) NOT NULL,
+  `poll_time` int(11) UNSIGNED NOT NULL DEFAULT '10',
+  `fetchall` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `keep` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `protocol` enum('POP3','IMAP','POP2','ETRN','AUTO') NOT NULL DEFAULT 'IMAP',
-  `usessl` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `subscribeall` tinyint(1) NOT NULL DEFAULT '1',
+  `skipempty` tinyint(1) NOT NULL DEFAULT '1',
+  `maxage` int(11) NOT NULL DEFAULT '365',
+  `usessl` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `sslcertck` tinyint(1) NOT NULL DEFAULT '0',
-  `sslcertpath` varchar(255) /*!40100 CHARACTER SET utf8 */ DEFAULT '',
-  `sslfingerprint` varchar(255) /*!40100 CHARACTER SET latin1 */ DEFAULT '',
+  `sslcertpath` varchar(255) CHARACTER SET utf8 DEFAULT '',
+  `sslfingerprint` varchar(255) DEFAULT '',
   `extra_options` text,
   `returned_text` text,
   `mda` varchar(255) NOT NULL DEFAULT '',
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
