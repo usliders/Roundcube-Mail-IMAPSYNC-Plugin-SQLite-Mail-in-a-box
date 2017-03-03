@@ -1,0 +1,10 @@
+package Conf;
+
+use vars qw/ db_conf /;
+
+$db_conf{'host'}	= "localhost";
+$db_conf{'db'}		= "roundcubemail";
+$db_conf{'username'}	= "imapsync";
+$db_conf{'password'}	= "OnePassword";
+
+1;
