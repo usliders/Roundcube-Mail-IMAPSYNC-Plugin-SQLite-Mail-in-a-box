@@ -1,7 +1,7 @@
 <?php
 
 /*******************************************************************************
- * Fetchmail Roundcube Plugin (Roundcube version 1.0-beta and above)
+ * RCimapSync Roundcube Plugin (Roundcube version 1.0-beta and above)
  * This software distributed under the terms of the GNU General Public License 
  * as published by the Free Software Foundation
  * Further details on the GPL license can be found at
@@ -99,7 +99,7 @@
 		$fetchall = rcube_utils::get_input_value ( '_imapsyncfetchall', rcube_utils::INPUT_POST );
 		$enabled = rcube_utils::get_input_value ( '_imapsyncenabled', rcube_utils::INPUT_POST );
                 $subscribeallenabled = rcube_utils::get_input_value ( '_imapsyncsubscribeall', rcube_utils::INPUT_POST );
-                $skipemptyfoldersenabled = rcube_utils::get_input_value ( '_imapsyncskipemptyfolder', rcube_utils::INPUT_POST );
+                $skipemptyfoldersenabled = rcube_utils::get_input_value ( '_imapsyncskipemptyfolders', rcube_utils::INPUT_POST );
                 $maxage = rcube_utils::get_input_value ( '_imapsyncmaxage', rcube_utils::INPUT_POST );
 		$newentry = rcube_utils::get_input_value ( '_imapsyncnewentry', rcube_utils::INPUT_POST );
 		if (! $keep) {
