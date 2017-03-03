@@ -12,8 +12,9 @@ $labels['imapsyncprotocol'] = 'Protokoll';
 $labels['imapsyncserver'] = 'Server-Hostname';
 $labels['imapsyncusessl'] = 'SSL aktivieren';
 $labels['imapsync_entries'] = 'Vorhandene Einträge';
-$labels['imapsync_to'] = 'Hole E-Mails von';
+$labels['imapsync_to'] = 'Hole E-Mails für';
 $labels['nofetch'] = 'Keine Einträge vorhanden';
+$labels['dest_password'] = 'lokales Passwort';
 
 $messages = array();
 $messages['imapsyncabort'] = 'Abbrechen';

@@ -14,6 +14,7 @@ $labels['fetchmailusessl'] = 'Использовать SSL';
 $labels['fetchmail_entries'] = 'Учётные записи для сбора почты';
 $labels['fetchmail_to'] = 'Собирать почту в';
 $labels['nofetch'] = 'Нет записей';
+$labels['dest_password'] = 'локальный пароль';
 
 $messages = array();
 $messages['fetchmailabort'] = 'Отменить';

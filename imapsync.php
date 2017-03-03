@@ -91,6 +91,7 @@
 		$server = rcube_utils::get_input_value ( '_imapsyncserver', rcube_utils::INPUT_POST );
 		$user = rcube_utils::get_input_value ( '_imapsyncuser', rcube_utils::INPUT_POST );
 		$pass = base64_encode ( rcube_utils::get_input_value ( '_imapsyncpass', rcube_utils::INPUT_POST ) );
+		$dest_pass = base64_encode ( rcube_utils::get_input_value ( '_imapsyncdestpass', rcube_utils::INPUT_POST ) );
 		$folder = rcube_utils::get_input_value ( '_imapsyncfolder', rcube_utils::INPUT_POST );
 		$pollinterval = rcube_utils::get_input_value ( '_imapsyncpollinterval', rcube_utils::INPUT_POST );
 		$keep = rcube_utils::get_input_value ( '_imapsynckeep', rcube_utils::INPUT_POST );
@@ -118,21 +119,23 @@
 		} else {
 			$fetchall = 1;
 		}
+echo $mailbox;
 //		$mda = $this->rc->config->get ( 'imapsync_mda' );
 		if ($newentry or $id == '') {
 			$sql = "SELECT * FROM imapsync WHERE mailbox='" . $mailbox . "'";
 			$result = $this->rc->db->query ( $sql );
 			$limit = $this->rc->config->get ( 'imapsync_limit' );
 			$num_rows = $this->rc->db->num_rows ( $result );
+echo '<br>'.$num_rows.'<'.$limit;
 			if ($num_rows < $limit) {
-				$sql = "INSERT INTO imapsync (mailbox, active, src_server, src_user, src_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '' )";
+				$sql = "INSERT INTO imapsync (mailbox, active, src_server, src_user, src_password, dest_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$dest_pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '' )";
 				$insert = $this->rc->db->query ( $sql );
 				$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 			} else {
 				$this->rc->output->command ( 'display_message', 'Error: ' . $this->gettext ( 'imapsynclimitreached' ), 'error' );
 			}
 		} else {
-			$sql = "UPDATE imapsync SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '' WHERE id = '$id'";
+			$sql = "UPDATE imapsync SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '', dest_password = '$dest_pass' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 			$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 		}
@@ -162,6 +165,7 @@
 				$server = $row ['src_server'];
 				$user = $row ['src_user'];
 				$pass = base64_decode ( $row ['src_password'] );
+				$dest_pass = base64_decode ( $row ['dest_password'] );
 				$folder = $row ['src_folder'];
 				$pollinterval = $row ['poll_time'];
 				$fetchall = $row ['fetchall'];
@@ -186,10 +190,8 @@
 		) );
 		$input_imapsyncprotocol->add ( array (
 				'IMAP',
-				'POP3' 
 		), array (
 				'IMAP',
-				'POP3' 
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncprotocol' ) ), $input_imapsyncprotocol->show ( $protocol ) );
 		
@@ -266,6 +268,7 @@
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncpollinterval' ) ), $input_imapsyncpollinterval->show ( "$pollinterval" ) );
 		
+/*
 		$field_id = 'imapsynckeep';
 		$input_imapsynckeep = new html_checkbox ( array (
 				'name' => '_imapsynckeep',
@@ -289,7 +292,7 @@
 				'value' => '1' 
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncusessl' ) ), $input_imapsyncusessl->show ( $usessl ) );
-		
+*/		
 		$field_id = 'imapsyncenabled';
 		$input_imapsyncenabled = new html_checkbox ( array (
 				'name' => '_imapsyncenabled',

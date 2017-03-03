@@ -11,9 +11,10 @@ $labels['imapsyncpollinterval'] = 'Poll interval for the mailbox';
 $labels['imapsyncprotocol'] = 'Protocol';
 $labels['imapsyncserver'] = 'Server hostname';
 $labels['imapsyncusessl'] = 'Use SSL';
-$labels['imapsync_entries'] = 'Accounts to collect from';
+$labels['imapsync_entries'] = 'Accounts to collect for';
 $labels['imapsync_to'] = 'Collect mail to';
 $labels['nofetch'] = 'No entries available';
+$labels['dest_password'] = 'local Password';
 
 $messages = array();
 $messages['imapsyncabort'] = 'Cancel';
