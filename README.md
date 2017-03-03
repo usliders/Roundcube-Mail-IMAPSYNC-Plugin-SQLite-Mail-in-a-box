@@ -32,15 +32,18 @@ Appending `, 'imapsync'` to the list of plugins will suffice.
 4. Unless default settings are suitable for you, you need to configure the plugin. See the [settings section](#settings) for more information.
 
 5. You need to create additional table in your (e.g. roundcube) database using the supplied `mysql.initial.sql` file. Hint: if you are using Plesk you have to open the mysql command line with 
-```
-mysql -uadmin -p`cat /etc/psa/.psa.shadow`
-```
-(https://kb.plesk.com/de/3472)
-
-- Change the database to whatever you wanna use, e.g.: `use roundcubemail;`
-- Open the mysql.initial.sql and copy it to the mysql shell.
-- Create a user and give necessary rights to the database and table, e.g.:
+	```bash
+	mysql -uadmin -p`cat /etc/psa/.psa.shadow`
 	```
+	(https://kb.plesk.com/de/3472)
+
+	- Change the database to whatever you wanna use, e.g.:
+	```mysql
+	use roundcubemail;
+	```
+	- Open the mysql.initial.sql and copy it to the mysql shell.
+	- Create a user and give necessary rights to the database and table, e.g.:
+	```mysql
 	CREATE USER 'imapsync'@'127.0.0.1' IDENTIFIED BY 'onepassword';
 	GRANT ALL PRIVILEGES ON roundcubemail.imapsync TO 'imapsync'@'127.0.0.1';
 	FLUSH PRIVILEGES;
