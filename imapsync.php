@@ -119,14 +119,12 @@
 		} else {
 			$fetchall = 1;
 		}
-echo $mailbox;
 //		$mda = $this->rc->config->get ( 'imapsync_mda' );
 		if ($newentry or $id == '') {
 			$sql = "SELECT * FROM imapsync WHERE mailbox='" . $mailbox . "'";
 			$result = $this->rc->db->query ( $sql );
 			$limit = $this->rc->config->get ( 'imapsync_limit' );
 			$num_rows = $this->rc->db->num_rows ( $result );
-echo '<br>'.$num_rows.'<'.$limit;
 			if ($num_rows < $limit) {
 				$sql = "INSERT INTO imapsync (mailbox, active, src_server, src_user, src_password, dest_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$dest_pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '' )";
 				$insert = $this->rc->db->query ( $sql );
