@@ -15,6 +15,9 @@ $labels['fetchmail_entries'] = 'Учётные записи для сбора п
 $labels['fetchmail_to'] = 'Собирать почту в';
 $labels['nofetch'] = 'Нет записей';
 $labels['dest_password'] = 'локальный пароль';
+$labels['imapsyncskipemptyfolders'] = 'оставить пустые папки';
+$labels['imapsyncsubscribeall'] = 'все подписаться папку';
+$labels['imapsyncmaxage'] = 'Максимальный возраст объектов (дней)';
 
 $messages = array();
 $messages['fetchmailabort'] = 'Отменить';

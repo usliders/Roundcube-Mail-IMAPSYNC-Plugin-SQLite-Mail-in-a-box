@@ -98,6 +98,9 @@
 		$usessl = rcube_utils::get_input_value ( '_imapsyncusessl', rcube_utils::INPUT_POST );
 		$fetchall = rcube_utils::get_input_value ( '_imapsyncfetchall', rcube_utils::INPUT_POST );
 		$enabled = rcube_utils::get_input_value ( '_imapsyncenabled', rcube_utils::INPUT_POST );
+                $subscribeallenabled = rcube_utils::get_input_value ( '_imapsyncsubscribeall', rcube_utils::INPUT_POST );
+                $skipemptyfoldersenabled = rcube_utils::get_input_value ( '_imapsyncskipemptyfolder', rcube_utils::INPUT_POST );
+                $maxage = rcube_utils::get_input_value ( '_imapsyncmaxage', rcube_utils::INPUT_POST );
 		$newentry = rcube_utils::get_input_value ( '_imapsyncnewentry', rcube_utils::INPUT_POST );
 		if (! $keep) {
 			$keep = 0;
@@ -119,6 +122,16 @@
 		} else {
 			$fetchall = 1;
 		}
+                if (! $skipemptyfoldersenabled) {
+                        $skipemptyfoldersenabled = 0;
+                } else {
+                        $skipemptyfoldersenabled = 1;
+                }
+                if (! $subscribeallenabled) {
+                        $subscribeallenabled = 0;
+                } else {
+                        $subscribeallenabled = 1;
+                }
 //		$mda = $this->rc->config->get ( 'imapsync_mda' );
 		if ($newentry or $id == '') {
 			$sql = "SELECT * FROM imapsync WHERE mailbox='" . $mailbox . "'";
@@ -126,14 +139,14 @@
 			$limit = $this->rc->config->get ( 'imapsync_limit' );
 			$num_rows = $this->rc->db->num_rows ( $result );
 			if ($num_rows < $limit) {
-				$sql = "INSERT INTO imapsync (mailbox, active, src_server, src_user, src_password, dest_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$dest_pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '' )";
+				$sql = "INSERT INTO imapsync (mailbox, active, src_server, src_user, src_password, dest_password, src_folder, poll_time, fetchall, keep, protocol, subscribeall, skipempty, maxage, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$dest_pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$subscribeallenabled', '$skipemptyfoldersenabled', '$maxage', '$usessl', 'password', '' )";
 				$insert = $this->rc->db->query ( $sql );
 				$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 			} else {
 				$this->rc->output->command ( 'display_message', 'Error: ' . $this->gettext ( 'imapsynclimitreached' ), 'error' );
 			}
 		} else {
-			$sql = "UPDATE imapsync SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '', dest_password = '$dest_pass' WHERE id = '$id'";
+			$sql = "UPDATE imapsync SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', subscribeall = '$subscribeallenabled', skipempty = '$skipemptyfoldersenabled', maxage = '$maxage', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '', dest_password = '$dest_pass' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 			$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 		}
@@ -150,6 +163,9 @@
 		$keep = 1;
 		$enabled = 1;
 		$protocol = 'IMAP';
+		$subscribeallenabled = 1;
+		$skipemptyfoldersenabled = 1;
+		$maxage = '365';
 		
 		// auslesen start
 		if ($id != '' || $id != 0) {
@@ -168,6 +184,9 @@
 				$pollinterval = $row ['poll_time'];
 				$fetchall = $row ['fetchall'];
 				$usessl = $row ['usessl'];
+                                $subscribeallenabled = $row ['subscribeall'];
+                                $skipemptyfoldersenabled = $row ['skipempty'];
+                                $maxage = $row ['maxage'];
 			}
 		}
 		$newentry = 0;
@@ -229,7 +248,7 @@
 				'size' => 40,
 				'autocomplete' => 'off' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'dest_password' ) ), $input_imapsyncdestpass->show ( $destpass ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'dest_password' ) ), $input_imapsyncdestpass->show ( $dest_pass ) );
 		
 		if ($this->show_folder) {
 			$field_id = 'imapsyncfolder';
@@ -266,7 +285,14 @@
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncpollinterval' ) ), $input_imapsyncpollinterval->show ( "$pollinterval" ) );
 		
-/*
+                $field_id = 'imapsyncenabled';
+                $input_imapsyncenabled = new html_checkbox ( array (
+                                'name' => '_imapsyncenabled',
+                                'id' => $field_id,
+                                'value' => '1'
+                ) );
+                $out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncenabled' ) ), $input_imapsyncenabled->show ( $enabled ) );
+
 		$field_id = 'imapsynckeep';
 		$input_imapsynckeep = new html_checkbox ( array (
 				'name' => '_imapsynckeep',
@@ -275,7 +301,7 @@
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsynckeep' ) ), $input_imapsynckeep->show ( $keep ) );
 		
-		$field_id = 'imapsyncfetchall';
+/*		$field_id = 'imapsyncfetchall';
 		$input_imapsyncfetchall = new html_checkbox ( array (
 				'name' => '_imapsyncfetchall',
 				'id' => $field_id,
@@ -291,14 +317,31 @@
 		) );
 		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncusessl' ) ), $input_imapsyncusessl->show ( $usessl ) );
 */		
-		$field_id = 'imapsyncenabled';
-		$input_imapsyncenabled = new html_checkbox ( array (
-				'name' => '_imapsyncenabled',
+		$field_id = 'imapsyncskipemptyfolders';
+		$input_imapsyncskipemptyfolders = new html_checkbox ( array (
+				'name' => '_imapsyncskipemptyfolders',
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncenabled' ) ), $input_imapsyncenabled->show ( $enabled ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncskipemptyfolders' ) ), $input_imapsyncskipemptyfolders->show ( $skipemptyfoldersenabled ) );
 		
+                $field_id = 'imapsyncsubscribeall';
+                $input_imapsyncsubscribeall = new html_checkbox ( array (
+                                'name' => '_imapsyncsubscribeall',
+                                'id' => $field_id,
+                                'value' => '1'
+                ) );
+                $out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncsubscribeall' ) ), $input_imapsyncsubscribeall->show ( $subscribeallenabled ) );
+
+                $field_id = 'imapsyncmaxage';
+                $input_imapsyncmaxage = new html_inputfield ( array (
+                                'name' => '_imapsyncmaxage',
+                                'id' => $field_id,
+                                'maxlength' => 320,
+                                'size' => 10
+                ) );
+                $out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncmaxage' ) ), $input_imapsyncmaxage->show ( $maxage ) );
+
 		if ($id != '' || $id != 0) {
 			$field_id = 'imapsyncnewentry';
 			$input_imapsyncnewentry = new html_checkbox ( array (

@@ -15,6 +15,9 @@ $labels['imapsync_entries'] = 'Accounts to collect for';
 $labels['imapsync_to'] = 'Collect mail to';
 $labels['nofetch'] = 'No entries available';
 $labels['dest_password'] = 'local Password';
+$labels['imapsyncskipemptyfolders'] = 'skip empty Folders';
+$labels['imapsyncsubscribeall'] = 'subscribe all Folders';
+$labels['imapsyncmaxage'] = 'max. sync Age (Days)';
 
 $messages = array();
 $messages['imapsyncabort'] = 'Cancel';
