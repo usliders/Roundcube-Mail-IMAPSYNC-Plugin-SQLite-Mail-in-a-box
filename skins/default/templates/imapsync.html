@@ -3,7 +3,7 @@
 <head>
 <title><roundcube:object name="pagetitle" /></title>
 <roundcube:include file="/includes/links.html" />
-<link rel="stylesheet" type="text/css" href="/this/fetchmail.css" />
+<link rel="stylesheet" type="text/css" href="/this/imapsync.css" />
 </head>
 <body class="noscroll">
 
@@ -17,22 +17,22 @@
 
 		<div id="pluginbody" class="uibox contentbox" style="width: 590px;">
 				<roundcube:object name="plugin.body" />
-				<h1 class="boxtitle">Fetchmail</h1>
+				<h1 class="boxtitle">Imapsync</h1>
 				<div class="boxcontent scroller">
-					<form name="fetchmailform" class="propform"
-						action="./?_task=settings&_action=plugin.fetchmail.save"
+					<form name="imapsyncform" class="propform"
+						action="./?_task=settings&_action=plugin.imapsync.save"
 						method="post">
-						<roundcube:object name="plugin.fetchmail_form" />
+						<roundcube:object name="plugin.imapsync_form" />
 
 						<div id="mybuttons">
-							<roundcube:button command="plugin.fetchmail.save" type="input"
+							<roundcube:button command="plugin.imapsync.save" type="input"
 								class="button mainaction" label="save" />
-							<roundcube:button command="plugin.fetchmail" type="input"
+							<roundcube:button command="plugin.imapsync" type="input"
 								class="button mainaction" label="cancel" />
 						</div>
 
 						<div id="mytable">
-							<roundcube:object name="plugin.fetchmail_table" class="fetchmail-table"
+							<roundcube:object name="plugin.imapsync_table" class="imapsync-table"
 								cellspacing="0" deleteIcon="/this/delete.png"
 								enableIcon="/this/enabled.png" disableIcon="/this/disabled.png" />
 						</div>

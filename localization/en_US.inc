@@ -1,25 +1,25 @@
 <?php
 
 $labels = array();
-$labels['fetchmail'] = 'Fetchmail';
-$labels['fetchmaildelete'] = 'Delete emails after receiving';
-$labels['fetchmailenabled'] = 'Enable';
-$labels['fetchmailfetchall'] = 'Fetch all e-mails from server';
-$labels['fetchmailfolder'] = 'Remote server folder';
-$labels['fetchmailkeep'] = 'Do not remove messages from the server';
-$labels['fetchmailpollinterval'] = 'Poll interval for the mailbox';
-$labels['fetchmailprotocol'] = 'Protocol';
-$labels['fetchmailserver'] = 'Server hostname';
-$labels['fetchmailusessl'] = 'Use SSL';
-$labels['fetchmail_entries'] = 'Accounts to collect from';
-$labels['fetchmail_to'] = 'Collect mail to';
+$labels['imapsync'] = 'Imapsync';
+$labels['imapsyncdelete'] = 'Delete emails after receiving';
+$labels['imapsyncenabled'] = 'Enable';
+$labels['imapsyncfetchall'] = 'Fetch all e-mails from server';
+$labels['imapsyncfolder'] = 'Remote server folder';
+$labels['imapsynckeep'] = 'Do not remove messages from the server';
+$labels['imapsyncpollinterval'] = 'Poll interval for the mailbox';
+$labels['imapsyncprotocol'] = 'Protocol';
+$labels['imapsyncserver'] = 'Server hostname';
+$labels['imapsyncusessl'] = 'Use SSL';
+$labels['imapsync_entries'] = 'Accounts to collect from';
+$labels['imapsync_to'] = 'Collect mail to';
 $labels['nofetch'] = 'No entries available';
 
 $messages = array();
-$messages['fetchmailabort'] = 'Cancel';
-$messages['fetchmaildelconfirm'] = 'Do you want to delete this entry?';
-$messages['fetchmaillimitreached'] = 'Limit reached';
-$messages['fetchmailnewentry'] = 'Save as new';
+$messages['imapsyncabort'] = 'Cancel';
+$messages['imapsyncdelconfirm'] = 'Do you want to delete this entry?';
+$messages['imapsynclimitreached'] = 'Limit reached';
+$messages['imapsyncnewentry'] = 'Save as new';
 $messages['opnotpermitted'] = 'Operation not permitted!';
 $messages['successfullydeleted'] = 'Deleted successfully!';
 $messages['successfullydisabled'] = 'Disabled successfully!';

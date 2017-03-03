@@ -51,53 +51,53 @@
 		}
 	}
 	function init_html() {
-		$this->register_handler ( 'plugin.fetchmail_form', array (
+		$this->register_handler ( 'plugin.imapsync_form', array (
 				$this,
 				'gen_form' 
 		) );
-		$this->register_handler ( 'plugin.fetchmail_table', array (
+		$this->register_handler ( 'plugin.imapsync_table', array (
 				$this,
 				'gen_table' 
 		) );
-		$this->rc->output->set_pagetitle ( $this->gettext ( 'fetchmail' ) );
-		$this->rc->output->send ( 'fetchmail.fetchmail' );
+		$this->rc->output->set_pagetitle ( $this->gettext ( 'imapsync' ) );
+		$this->rc->output->send ( 'imapsync.imapsync' );
 	}
 	function disable() {
 		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET );
 		if ($id != 0 || $id != '') {
-			$sql = "UPDATE fetchmail SET active = '0' WHERE id = '$id'";
+			$sql = "UPDATE imapsync SET active = '0' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 		}
 	}
 	function enable() {
 		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET );
 		if ($id != 0 || $id != '') {
-			$sql = "UPDATE fetchmail SET active = '1' WHERE id = '$id'";
+			$sql = "UPDATE imapsync SET active = '1' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 		}
 	}
 	function del() {
 		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_GET );
 		if ($id != 0 || $id != '') {
-			$sql = "DELETE FROM fetchmail WHERE id = '$id'";
+			$sql = "DELETE FROM imapsync WHERE id = '$id'";
 			$delete = $this->rc->db->query ( $sql );
 		}
 	}
 	function save() {
 		$id = rcube_utils::get_input_value ( '_id', rcube_utils::INPUT_POST );
 		$mailbox = $this->rc->user->data ['username'];
-		$protocol = rcube_utils::get_input_value ( '_fetchmailprotocol', rcube_utils::INPUT_POST );
+		$protocol = rcube_utils::get_input_value ( '_imapsyncprotocol', rcube_utils::INPUT_POST );
 		$protocol = strtoupper ( $protocol ); // TODO: temporary
-		$server = rcube_utils::get_input_value ( '_fetchmailserver', rcube_utils::INPUT_POST );
-		$user = rcube_utils::get_input_value ( '_fetchmailuser', rcube_utils::INPUT_POST );
-		$pass = base64_encode ( rcube_utils::get_input_value ( '_fetchmailpass', rcube_utils::INPUT_POST ) );
-		$folder = rcube_utils::get_input_value ( '_fetchmailfolder', rcube_utils::INPUT_POST );
-		$pollinterval = rcube_utils::get_input_value ( '_fetchmailpollinterval', rcube_utils::INPUT_POST );
-		$keep = rcube_utils::get_input_value ( '_fetchmailkeep', rcube_utils::INPUT_POST );
-		$usessl = rcube_utils::get_input_value ( '_fetchmailusessl', rcube_utils::INPUT_POST );
-		$fetchall = rcube_utils::get_input_value ( '_fetchmailfetchall', rcube_utils::INPUT_POST );
-		$enabled = rcube_utils::get_input_value ( '_fetchmailenabled', rcube_utils::INPUT_POST );
-		$newentry = rcube_utils::get_input_value ( '_fetchmailnewentry', rcube_utils::INPUT_POST );
+		$server = rcube_utils::get_input_value ( '_imapsyncserver', rcube_utils::INPUT_POST );
+		$user = rcube_utils::get_input_value ( '_imapsyncuser', rcube_utils::INPUT_POST );
+		$pass = base64_encode ( rcube_utils::get_input_value ( '_imapsyncpass', rcube_utils::INPUT_POST ) );
+		$folder = rcube_utils::get_input_value ( '_imapsyncfolder', rcube_utils::INPUT_POST );
+		$pollinterval = rcube_utils::get_input_value ( '_imapsyncpollinterval', rcube_utils::INPUT_POST );
+		$keep = rcube_utils::get_input_value ( '_imapsynckeep', rcube_utils::INPUT_POST );
+		$usessl = rcube_utils::get_input_value ( '_imapsyncusessl', rcube_utils::INPUT_POST );
+		$fetchall = rcube_utils::get_input_value ( '_imapsyncfetchall', rcube_utils::INPUT_POST );
+		$enabled = rcube_utils::get_input_value ( '_imapsyncenabled', rcube_utils::INPUT_POST );
+		$newentry = rcube_utils::get_input_value ( '_imapsyncnewentry', rcube_utils::INPUT_POST );
 		if (! $keep) {
 			$keep = 0;
 		} else {
@@ -118,21 +118,21 @@
 		} else {
 			$fetchall = 1;
 		}
-//		$mda = $this->rc->config->get ( 'fetchmail_mda' );
+//		$mda = $this->rc->config->get ( 'imapsync_mda' );
 		if ($newentry or $id == '') {
-			$sql = "SELECT * FROM fetchmail WHERE mailbox='" . $mailbox . "'";
+			$sql = "SELECT * FROM imapsync WHERE mailbox='" . $mailbox . "'";
 			$result = $this->rc->db->query ( $sql );
-			$limit = $this->rc->config->get ( 'fetchmail_limit' );
+			$limit = $this->rc->config->get ( 'imapsync_limit' );
 			$num_rows = $this->rc->db->num_rows ( $result );
 			if ($num_rows < $limit) {
-				$sql = "INSERT INTO fetchmail (mailbox, active, src_server, src_user, src_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '' )";
+				$sql = "INSERT INTO imapsync (mailbox, active, src_server, src_user, src_password, src_folder, poll_time, fetchall, keep, protocol, usessl, src_auth, mda) VALUES ('$mailbox', '$enabled', '$server', '$user', '$pass', '$folder', '$pollinterval', '$fetchall', '$keep', '$protocol', '$usessl', 'password', '' )";
 				$insert = $this->rc->db->query ( $sql );
 				$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 			} else {
-				$this->rc->output->command ( 'display_message', 'Error: ' . $this->gettext ( 'fetchmaillimitreached' ), 'error' );
+				$this->rc->output->command ( 'display_message', 'Error: ' . $this->gettext ( 'imapsynclimitreached' ), 'error' );
 			}
 		} else {
-			$sql = "UPDATE fetchmail SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '' WHERE id = '$id'";
+			$sql = "UPDATE imapsync SET mailbox = '$mailbox', active = '$enabled', keep = '$keep', protocol = '$protocol', src_server = '$server', src_user = '$user', src_password = '$pass', src_folder = '$folder', poll_time = '$pollinterval', fetchall = '$fetchall', usessl = '$usessl', src_auth = 'password', mda = '' WHERE id = '$id'";
 			$update = $this->rc->db->query ( $sql );
 			$this->rc->output->command ( 'display_message', $this->gettext ( 'successfullysaved' ), 'confirmation' );
 		}
@@ -152,7 +152,7 @@
 		
 		// auslesen start
 		if ($id != '' || $id != 0) {
-			$sql = "SELECT * FROM fetchmail WHERE mailbox='" . $mailbox . "' AND id='" . $id . "'";
+			$sql = "SELECT * FROM imapsync WHERE mailbox='" . $mailbox . "' AND id='" . $id . "'";
 			$result = $this->rc->db->query ( $sql );
 			while ( $row = $this->rc->db->fetch_assoc ( $result ) ) {
 				$enabled = $row ['active'];
@@ -169,7 +169,7 @@
 			}
 		}
 		$newentry = 0;
-		$out .= '<fieldset><legend>' . $this->gettext ( 'fetchmail_to' ) . ' ' . $mailbox . '</legend>' . "\n";
+		$out .= '<fieldset><legend>' . $this->gettext ( 'imapsync_to' ) . ' ' . $mailbox . '</legend>' . "\n";
 		$out .= '<br />' . "\n";
 		$out .= '<table' . $attrib_str . ">\n\n";
 		$hidden_id = new html_hiddenfield ( array (
@@ -178,76 +178,76 @@
 		) );
 		$out .= $hidden_id->show ();
 		
-		$field_id = 'fetchmailprotocol';
-		$input_fetchmailprotocol = new html_select ( array (
-				'name' => '_fetchmailprotocol',
+		$field_id = 'imapsyncprotocol';
+		$input_imapsyncprotocol = new html_select ( array (
+				'name' => '_imapsyncprotocol',
 				'id' => $field_id,
-				'onchange' => 'fetchmail_toggle_folder();' 
+				'onchange' => 'imapsync_toggle_folder();' 
 		) );
-		$input_fetchmailprotocol->add ( array (
+		$input_imapsyncprotocol->add ( array (
 				'IMAP',
 				'POP3' 
 		), array (
 				'IMAP',
 				'POP3' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailprotocol' ) ), $input_fetchmailprotocol->show ( $protocol ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncprotocol' ) ), $input_imapsyncprotocol->show ( $protocol ) );
 		
-		$field_id = 'fetchmailserver';
-		$input_fetchmailserver = new html_inputfield ( array (
-				'name' => '_fetchmailserver',
+		$field_id = 'imapsyncserver';
+		$input_imapsyncserver = new html_inputfield ( array (
+				'name' => '_imapsyncserver',
 				'id' => $field_id,
 				'maxlength' => 320,
 				'size' => 40 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailserver' ) ), $input_fetchmailserver->show ( $server ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncserver' ) ), $input_imapsyncserver->show ( $server ) );
 		
-		$field_id = 'fetchmailuser';
-		$input_fetchmailuser = new html_inputfield ( array (
-				'name' => '_fetchmailuser',
+		$field_id = 'imapsyncuser';
+		$input_imapsyncuser = new html_inputfield ( array (
+				'name' => '_imapsyncuser',
 				'id' => $field_id,
 				'maxlength' => 320,
 				'size' => 40 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'username' ) ), $input_fetchmailuser->show ( $user ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'username' ) ), $input_imapsyncuser->show ( $user ) );
 		
-		$field_id = 'fetchmailpass';
-		$input_fetchmailpass = new html_passwordfield ( array (
-				'name' => '_fetchmailpass',
+		$field_id = 'imapsyncpass';
+		$input_imapsyncpass = new html_passwordfield ( array (
+				'name' => '_imapsyncpass',
 				'id' => $field_id,
 				'maxlength' => 320,
 				'size' => 40,
 				'autocomplete' => 'off' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'password' ) ), $input_fetchmailpass->show ( $pass ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'password' ) ), $input_imapsyncpass->show ( $pass ) );
 		
-		$field_id = 'fetchmaildestpass';
-		$input_fetchmaildestpass = new html_passwordfield ( array (
-				'name' => '_fetchmaildestpass',
+		$field_id = 'imapsyncdestpass';
+		$input_imapsyncdestpass = new html_passwordfield ( array (
+				'name' => '_imapsyncdestpass',
 				'id' => $field_id,
 				'maxlength' => 320,
 				'size' => 40,
 				'autocomplete' => 'off' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'dest_password' ) ), $input_fetchmaildestpass->show ( $destpass ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'dest_password' ) ), $input_imapsyncdestpass->show ( $destpass ) );
 		
 		if ($this->show_folder) {
-			$field_id = 'fetchmailfolder';
-			$input_fetchmailfolder = new html_inputfield ( array (
-					'name' => '_fetchmailfolder',
+			$field_id = 'imapsyncfolder';
+			$input_imapsyncfolder = new html_inputfield ( array (
+					'name' => '_imapsyncfolder',
 					'id' => $field_id,
 					'maxlength' => 320,
 					'size' => 40 
 			) );
-			$out .= sprintf ( "<tr id=\"fetchmail_folder_display\"" . (($protocol != "IMAP") ? ("style=\"display: none;\"") : ("")) . "><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailfolder' ) ), $input_fetchmailfolder->show ( $folder ) );
+			$out .= sprintf ( "<tr id=\"imapsync_folder_display\"" . (($protocol != "IMAP") ? ("style=\"display: none;\"") : ("")) . "><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncfolder' ) ), $input_imapsyncfolder->show ( $folder ) );
 		}
 		
-		$field_id = 'fetchmailpollinterval';
-		$input_fetchmailpollinterval = new html_select ( array (
-				'name' => '_fetchmailpollinterval',
+		$field_id = 'imapsyncpollinterval';
+		$input_imapsyncpollinterval = new html_select ( array (
+				'name' => '_imapsyncpollinterval',
 				'id' => $field_id 
 		) );
-		$input_fetchmailpollinterval->add ( array (
+		$input_imapsyncpollinterval->add ( array (
 				'5',
 				'10',
 				'15',
@@ -264,63 +264,63 @@
 				'30',
 				'60' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailpollinterval' ) ), $input_fetchmailpollinterval->show ( "$pollinterval" ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncpollinterval' ) ), $input_imapsyncpollinterval->show ( "$pollinterval" ) );
 		
-		$field_id = 'fetchmailkeep';
-		$input_fetchmailkeep = new html_checkbox ( array (
-				'name' => '_fetchmailkeep',
+		$field_id = 'imapsynckeep';
+		$input_imapsynckeep = new html_checkbox ( array (
+				'name' => '_imapsynckeep',
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailkeep' ) ), $input_fetchmailkeep->show ( $keep ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsynckeep' ) ), $input_imapsynckeep->show ( $keep ) );
 		
-		$field_id = 'fetchmailfetchall';
-		$input_fetchmailfetchall = new html_checkbox ( array (
-				'name' => '_fetchmailfetchall',
+		$field_id = 'imapsyncfetchall';
+		$input_imapsyncfetchall = new html_checkbox ( array (
+				'name' => '_imapsyncfetchall',
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailfetchall' ) ), $input_fetchmailfetchall->show ( $fetchall ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncfetchall' ) ), $input_imapsyncfetchall->show ( $fetchall ) );
 		
-		$field_id = 'fetchmailusessl';
-		$input_fetchmailusessl = new html_checkbox ( array (
-				'name' => '_fetchmailusessl',
+		$field_id = 'imapsyncusessl';
+		$input_imapsyncusessl = new html_checkbox ( array (
+				'name' => '_imapsyncusessl',
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailusessl' ) ), $input_fetchmailusessl->show ( $usessl ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncusessl' ) ), $input_imapsyncusessl->show ( $usessl ) );
 		
-		$field_id = 'fetchmailenabled';
-		$input_fetchmailenabled = new html_checkbox ( array (
-				'name' => '_fetchmailenabled',
+		$field_id = 'imapsyncenabled';
+		$input_imapsyncenabled = new html_checkbox ( array (
+				'name' => '_imapsyncenabled',
 				'id' => $field_id,
 				'value' => '1' 
 		) );
-		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailenabled' ) ), $input_fetchmailenabled->show ( $enabled ) );
+		$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncenabled' ) ), $input_imapsyncenabled->show ( $enabled ) );
 		
 		if ($id != '' || $id != 0) {
-			$field_id = 'fetchmailnewentry';
-			$input_fetchmailnewentry = new html_checkbox ( array (
-					'name' => '_fetchmailnewentry',
+			$field_id = 'imapsyncnewentry';
+			$input_imapsyncnewentry = new html_checkbox ( array (
+					'name' => '_imapsyncnewentry',
 					'id' => $field_id,
 					'value' => '1' 
 			) );
-			$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'fetchmailnewentry' ) ), $input_fetchmailnewentry->show ( $newentry ) );
+			$out .= sprintf ( "<tr><td class=\"title\"><label for=\"%s\">%s</label>:</td><td>%s</td></tr>\n", $field_id, rcube_utils::rep_specialchars_output ( $this->gettext ( 'imapsyncnewentry' ) ), $input_imapsyncnewentry->show ( $newentry ) );
 		}
 		
 		$out .= "\n</table>";
 		$out .= '<br />' . "\n";
 		$out .= "</fieldset>\n";
-		$this->rc->output->add_gui_object ( 'fetchmailform', 'fetchmail-form' );
+		$this->rc->output->add_gui_object ( 'imapsyncform', 'imapsync-form' );
 		return $out;
 	}
 	function gen_table($attrib) {
 		$mailbox = $this->rc->user->data ['username'];
-		$sql = "SELECT * FROM fetchmail WHERE mailbox='$mailbox'";
+		$sql = "SELECT * FROM imapsync WHERE mailbox='$mailbox'";
 		$result = $this->rc->db->query ( $sql );
 		$num_rows = $this->rc->db->num_rows ( $result );
-		$limit = $this->rc->config->get ( 'fetchmail_limit' );
-		$out = '<fieldset><legend>' . $this->gettext ( 'fetchmail_entries' ) . " (<span id=\"fetchmail_items_number\">$num_rows</span>/$limit)" . '</legend>' . "\n";
+		$limit = $this->rc->config->get ( 'imapsync_limit' );
+		$out = '<fieldset><legend>' . $this->gettext ( 'imapsync_entries' ) . " (<span id=\"imapsync_items_number\">$num_rows</span>/$limit)" . '</legend>' . "\n";
 		$out .= '<br />' . "\n";
 		$fetch_table = new html_table ( array (
 				'id' => 'fetch-table',
@@ -330,14 +330,14 @@
 		) );
 		$fetch_table->add_header ( array (
 				'width' => ($this->show_folder) ? ('100px') : ('184px') 
-		), $this->gettext ( 'fetchmailserver' ) );
+		), $this->gettext ( 'imapsyncserver' ) );
 		$fetch_table->add_header ( array (
 				'width' => ($this->show_folder) ? ('100px') : ('184px') 
 		), $this->gettext ( 'username' ) );
 		if ($this->show_folder) {
 			$fetch_table->add_header ( array (
 					'width' => '100px' 
-			), $this->gettext ( 'fetchmailfolder' ) );
+			), $this->gettext ( 'imapsyncfolder' ) );
 		}
 		$fetch_table->add_header ( array (
 				'width' => '26px' 
@@ -373,14 +373,14 @@
 	}
 	private function _fetch_row($fetch_table, $col_remoteserver, $col_remoteuser, $col_folder, $active, $id, $attrib) {
 		$fetch_table->add ( array (
-				'onclick' => 'fetchmail_edit(' . $id . ');' 
+				'onclick' => 'imapsync_edit(' . $id . ');' 
 		), $col_remoteserver );
 		$fetch_table->add ( array (
-				'onclick' => 'fetchmail_edit(' . $id . ');' 
+				'onclick' => 'imapsync_edit(' . $id . ');' 
 		), $col_remoteuser );
 		if ($this->show_folder) {
 			$fetch_table->add ( array (
-					'onclick' => 'fetchmail_edit(' . $id . ');' 
+					'onclick' => 'imapsync_edit(' . $id . ');' 
 			), $col_folder );
 		}
 		$disable_button = html::img ( array (
@@ -417,9 +417,9 @@
 	}
 	function settings_actions($args) {
 		$args ['actions'] [] = array (
-				'action' => 'plugin.fetchmail',
-				'label' => 'fetchmail.fetchmail',
-				'title' => 'fetchmail.fetchmail' 
+				'action' => 'plugin.imapsync',
+				'label' => 'imapsync.imapsync',
+				'title' => 'imapsync.imapsync' 
 		);
 		return $args;
 	}
