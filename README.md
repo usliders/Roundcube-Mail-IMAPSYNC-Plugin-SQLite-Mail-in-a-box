@@ -2,6 +2,10 @@
 
 **Roundcube imapsync plugin** is a **Roundcube** plugin, which allows users to sync their mail from external mailboxes incl. IMAP-Folder.
 
+##Screenshot
+
+![Screenshot](https://cloud.githubusercontent.com/assets/8064903/23556852/4b069624-002e-11e7-8313-0c9896b8efdb.png)
+
 ##Prerequisites
 1. **Roundcube**
 2. Database (**MySQL**)
