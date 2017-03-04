@@ -16,13 +16,20 @@
 
 ##Installation
 1. First you need to install **imapsync** itself. For **Debian** you can do so by 
-	`sudo apt-get install imapsync`
-	or get it from the source
+	```bash
+	apt-get install imapsync
+	```
+	or get it from the source (**recommended**)
 	https://github.com/imapsync/imapsync
 	
-2. Next you should extract **Roundcube imapsync plugin** archive into your **Roundcube** `plugins` folder creating "imapsync" folder there.
-  * You can do so either by using `composer` for which there is `composer.json`, still you need to follow further installation steps since those could not be accomplished with `composer`
-  * Alternatively you can clone this github repo -- `git clone https://github.com/server-gurus/RCimapSync.git`
+2. Next you should extract the **Roundcube imapsync plugin** archive into your **Roundcube** `plugins` folder creating "imapsync" folder there.
+	- You can do so either by using `composer` for which there is `composer.json`, still you need to follow further installation steps since those could not be accomplished with `composer`
+	- Alternatively you can clone this github repo (**recommended**), e.g.:
+  	```bash
+	apt-get install git
+	cd /path/to/your/roundcube/plugins/
+	git clone https://github.com/server-gurus/RCimapSync.git ./imapsync
+	```
   
 3. After that you need to enable newly installed plugin by adding it to **Roundcube** plugin list. For **Debian** related config file is `/etc/roundcube/main.inc.php` (for Plesk it is `config.inc.php`) and relevant setting is 
 	```php
