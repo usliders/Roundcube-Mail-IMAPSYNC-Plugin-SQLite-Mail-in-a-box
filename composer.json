@@ -1,5 +1,5 @@
 {
-	"name" : "ServerGurus/RCimapSync",
+	"name" : "servergurus/rcimapsync",
 	"type" : "roundcube-plugin",
 	"description" : "Roundcube imapsync plugin is a Roundcube plugin, which allows users to sync their mail from external mailboxes while auto-syncing all IMAP-Folders. Including a completely rewritten (fetchmail.pl) imapsync.pl which is much more secure.",
 	"keywords" : [
