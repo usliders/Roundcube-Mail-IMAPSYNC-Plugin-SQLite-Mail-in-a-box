@@ -110,7 +110,7 @@ Christian Bischoff, https://github.com/DaCHRIS
 
 ###List of contributors
 
-For a complete list of contributors, refer to [Github project contributors page](https://github.com/server-gurus/RCimapSync/graphs/contributors)
+For a complete list of contributors, refer to [Github project contributors page](https://github.com/server-gurus/RCimapSync/network/members)
 
 ####Currently maintained by
 * [servergurus](https://github.com/server-gurus)
