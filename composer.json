@@ -12,18 +12,6 @@
 	"homepage" : "https://github.com/server-gurus/RCimapSync",
 	"license" : "GPL",
 	"authors" : [{
-			"name" : "Arthur Mayer",
-			"role" : "Retired developer",
-			"homepage" : "https://github.com/flames"
-		}, {
-			"name" : "puzich",
-			"role" : "Retired developer",
-			"homepage" : "https://github.com/puzich"
-		}, {
-			"name" : "PF4Public",
-			"role" : "Retired developer",
-			"homepage" : "https://github.com/PF4Public"
-		}, {
 			"name" : "ServerGurus",
 			"role" : "Developer",
 			"homepage" : "https://servergurus.de"
@@ -38,6 +26,8 @@
 		}
 	],
 	"require" : {
+		"imapsync": ">=1.7",
+		"php": ">=5.3.0",
 		"roundcube/plugin-installer" : ">=0.1.6"
 	},
 	"support" : {
