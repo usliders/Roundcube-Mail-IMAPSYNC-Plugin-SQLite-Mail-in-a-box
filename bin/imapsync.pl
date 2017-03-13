@@ -65,7 +65,7 @@ sub main {
 			push(@params, $ref->{'maxage'});
 		}
 
-		system("imapsync", @params) || &log_and_die($!);
+		system("imapsync", @params) || print($!);
 		
 		my $update_stmnt = "UPDATE imapsync SET returned_text=".$DBH->quote('').", date=now() WHERE id=".$ref->{'id'};
 		$DBH->do($update_stmnt);
