@@ -1,6 +1,6 @@
 package Conf;
 
-use vars qw/ db_conf /;
+use vars qw/ %db_conf /;
 
 $db_conf{'host'}	= "localhost";
 $db_conf{'db'}		= "roundcubemail";
