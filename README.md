@@ -7,7 +7,7 @@
 
 ## Screenshot
 
-![Screenshot](Image_view.png)
+![Screenshot](https://github.com/usliders/Roundcube-Mail-IMAPSYNC-Plugin-SQLite-Mail-in-a-box/blob/master/Image_view.png)
 
 
 ## 📋 Содержание
