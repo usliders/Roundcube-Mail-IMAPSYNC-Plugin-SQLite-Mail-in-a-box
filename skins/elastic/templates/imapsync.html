@@ -1,0 +1,51 @@
+
+<roundcube:include file="/includes/header.html" />
+
+<roundcube:include file="includes/layout.html" />
+<roundcube:include file="includes/menu.html" />
+
+<roundcube:include file="includes/settings-menu.html" style="flex: 0;" />
+
+<roundcube:include file="/includes/links.html" />
+
+<link rel="stylesheet" type="text/css" href="/this/imapsync.css" />
+
+	<div id="mainscreen" class="offset">
+
+		<roundcube:if condition="env:task == 'settings'" />
+		<roundcube:include file="/includes/settingstabs.html" />
+		<roundcube:endif />
+
+		<div id="pluginbody" class="uibox contentbox" style="width: 640px; padding: 20px;">
+				<roundcube:object name="plugin.body" />
+				<h1 class="boxtitle">Imapsync</h1>
+				<div class="boxcontent scroller">
+					<form name="imapsyncform" class="propform"
+						action="./?_task=settings&_action=plugin.imapsync.save"
+						method="post">
+						<roundcube:object name="plugin.imapsync_form" />
+
+						<div id="mybuttons">
+							<roundcube:button command="plugin.imapsync.save" type="input"
+								class="button mainaction" label="save" />
+							<roundcube:button command="plugin.imapsync" type="input"
+								class="button mainaction" label="cancel" />
+						</div>
+
+						<div id="mytable">
+							<roundcube:object name="plugin.imapsync_table" class="imapsync-table"
+								cellspacing="0" deleteIcon="/this/delete.png"
+								enableIcon="/this/enabled.png" disableIcon="/this/disabled.png" />
+						</div>
+					</form>
+				</div>
+			<roundcube:object name="message" id="message" class="statusbar" />
+		</div>
+
+	</div>
+
+	<roundcube:object name="plugin.footer" />
+
+	<roundcube:include file="/includes/footer.html" />
+
+
